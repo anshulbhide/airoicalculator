@@ -1,13 +1,18 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
 import type { InsertCalculator } from "@shared/schema";
+import React from "react";
 
 interface SocialSectionProps {
   onUpdate: (data: Partial<InsertCalculator>) => void;
 }
 
 export default function SocialSection({ onUpdate }: SocialSectionProps) {
+  // Set fixed 20% improvement when component mounts
+  React.useEffect(() => {
+    onUpdate({ socialImprovementPct: "20" });
+  }, [onUpdate]);
+
   return (
     <div className="space-y-6">
       <div className="text-sm text-muted-foreground mb-6">
@@ -40,27 +45,9 @@ export default function SocialSection({ onUpdate }: SocialSectionProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <div className="flex justify-between">
-          <Label>Expected Efficiency Improvement (%)</Label>
-          <span className="text-sm text-muted-foreground" id="social-improvement">
-            40%
-          </span>
-        </div>
-        <Slider
-          defaultValue={[40]}
-          max={70}
-          step={1}
-          onValueChange={(value) => {
-            onUpdate({ socialImprovementPct: value[0].toString() });
-            const label = document.getElementById("social-improvement");
-            if (label) label.textContent = `${value[0]}%`;
-          }}
-        />
-        <p className="text-sm text-muted-foreground">
-          AI-powered content creation tools typically reduce content creation time and costs by 40-70%
-        </p>
-      </div>
+      <p className="text-sm text-muted-foreground">
+        Our AI-powered content creation tools reduce content creation time and costs by 20%
+      </p>
     </div>
   );
 }

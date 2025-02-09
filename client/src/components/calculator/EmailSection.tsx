@@ -1,13 +1,18 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
 import type { InsertCalculator } from "@shared/schema";
+import React, {useEffect} from 'react';
 
 interface EmailSectionProps {
   onUpdate: (data: Partial<InsertCalculator>) => void;
 }
 
 export default function EmailSection({ onUpdate }: EmailSectionProps) {
+  // Set fixed 20% improvement when component mounts
+  useEffect(() => {
+    onUpdate({ emailImprovementPct: "20" });
+  }, [onUpdate]);
+
   return (
     <div className="space-y-6">
       <div className="text-sm text-muted-foreground mb-6">
@@ -64,27 +69,9 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <div className="flex justify-between">
-          <Label>Expected Improvement with AI (%)</Label>
-          <span className="text-sm text-muted-foreground" id="improvement-value">
-            15%
-          </span>
-        </div>
-        <Slider
-          defaultValue={[15]}
-          max={30}
-          step={1}
-          onValueChange={(value) => {
-            onUpdate({ emailImprovementPct: value[0].toString() });
-            const label = document.getElementById("improvement-value");
-            if (label) label.textContent = `${value[0]}%`;
-          }}
-        />
-        <p className="text-sm text-muted-foreground">
-          Based on industry averages, AI-powered email campaigns typically see 10-30% improvement in conversion rates
-        </p>
-      </div>
+      <p className="text-sm text-muted-foreground">
+        Our AI-powered email campaigns typically achieve a 20% improvement in conversion rates
+      </p>
     </div>
   );
 }

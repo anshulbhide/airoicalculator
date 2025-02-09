@@ -27,10 +27,10 @@ const initialFormState: Partial<InsertCalculator> = {
   costPerInquiry: "0",
   numberOfProducts: 0,
   descriptionUpdateTime: 0,
-  emailImprovementPct: "15",
-  socialImprovementPct: "40",
-  chatbotImprovementPct: "50",
-  productImprovementPct: "60"
+  emailImprovementPct: "20",
+  socialImprovementPct: "20",
+  chatbotImprovementPct: "20",
+  productImprovementPct: "20"
 };
 
 export default function Calculator() {

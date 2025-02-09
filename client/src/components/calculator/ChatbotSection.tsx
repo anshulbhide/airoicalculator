@@ -1,13 +1,18 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
 import type { InsertCalculator } from "@shared/schema";
+import React from 'react';
 
 interface ChatbotSectionProps {
   onUpdate: (data: Partial<InsertCalculator>) => void;
 }
 
 export default function ChatbotSection({ onUpdate }: ChatbotSectionProps) {
+  // Set fixed 20% improvement when component mounts
+  React.useEffect(() => {
+    onUpdate({ chatbotImprovementPct: "20" });
+  }, [onUpdate]);
+
   return (
     <div className="space-y-6">
       <div className="text-sm text-muted-foreground mb-6">
@@ -52,27 +57,9 @@ export default function ChatbotSection({ onUpdate }: ChatbotSectionProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <div className="flex justify-between">
-          <Label>Expected Resolution Rate with AI (%)</Label>
-          <span className="text-sm text-muted-foreground" id="chatbot-improvement">
-            50%
-          </span>
-        </div>
-        <Slider
-          defaultValue={[50]}
-          max={80}
-          step={1}
-          onValueChange={(value) => {
-            onUpdate({ chatbotImprovementPct: value[0].toString() });
-            const label = document.getElementById("chatbot-improvement");
-            if (label) label.textContent = `${value[0]}%`;
-          }}
-        />
-        <p className="text-sm text-muted-foreground">
-          AI chatbots can handle 50-80% of routine customer inquiries automatically
-        </p>
-      </div>
+      <p className="text-sm text-muted-foreground">
+        AI chatbots can handle 20% of routine customer inquiries automatically
+      </p>
     </div>
   );
 }

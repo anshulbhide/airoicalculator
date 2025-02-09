@@ -1,13 +1,18 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
 import type { InsertCalculator } from "@shared/schema";
+import React from "react";
 
 interface ProductSectionProps {
   onUpdate: (data: Partial<InsertCalculator>) => void;
 }
 
 export default function ProductSection({ onUpdate }: ProductSectionProps) {
+  // Set fixed 20% improvement when component mounts
+  React.useEffect(() => {
+    onUpdate({ productImprovementPct: "20" });
+  }, [onUpdate]);
+
   return (
     <div className="space-y-6">
       <div className="text-sm text-muted-foreground mb-6">
@@ -42,27 +47,9 @@ export default function ProductSection({ onUpdate }: ProductSectionProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <div className="flex justify-between">
-          <Label>Expected Time Savings with AI (%)</Label>
-          <span className="text-sm text-muted-foreground" id="product-improvement">
-            60%
-          </span>
-        </div>
-        <Slider
-          defaultValue={[60]}
-          max={90}
-          step={1}
-          onValueChange={(value) => {
-            onUpdate({ productImprovementPct: value[0].toString() });
-            const label = document.getElementById("product-improvement");
-            if (label) label.textContent = `${value[0]}%`;
-          }}
-        />
-        <p className="text-sm text-muted-foreground">
-          AI-powered content generation can reduce product description creation time by 60-90%
-        </p>
-      </div>
+      <p className="text-sm text-muted-foreground">
+        AI-powered content generation can reduce product description creation time by 20%
+      </p>
     </div>
   );
 }
