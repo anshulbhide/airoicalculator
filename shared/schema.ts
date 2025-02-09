@@ -42,12 +42,12 @@ export type Calculator = typeof calculatorInputs.$inferSelect;
 export const results = pgTable("results", {
   id: serial("id").primaryKey(),
   calculatorId: integer("calculator_id").notNull(),
-  emailRevenue: decimal("email_revenue", { precision: 10, scale: 2 }).notNull(),
-  socialSavings: decimal("social_savings", { precision: 10, scale: 2 }).notNull(),
-  chatbotSavings: decimal("chatbot_savings", { precision: 10, scale: 2 }).notNull(),
-  productSavings: decimal("product_savings", { precision: 10, scale: 2 }).notNull(),
-  totalBenefits: decimal("total_benefits", { precision: 10, scale: 2 }).notNull(),
-  roi: decimal("roi", { precision: 10, scale: 2 }).notNull(),
+  emailRevenue: decimal("email_revenue", { precision: 20, scale: 2 }).notNull(),
+  socialSavings: decimal("social_savings", { precision: 20, scale: 2 }).notNull(),
+  chatbotSavings: decimal("chatbot_savings", { precision: 20, scale: 2 }).notNull(),
+  productSavings: decimal("product_savings", { precision: 20, scale: 2 }).notNull(),
+  totalBenefits: decimal("total_benefits", { precision: 20, scale: 2 }).notNull(),
+  roi: decimal("roi", { precision: 20, scale: 2 }).notNull(),
   paybackMonths: decimal("payback_months", { precision: 10, scale: 2 }).notNull()
 });
 
