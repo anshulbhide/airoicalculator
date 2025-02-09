@@ -46,7 +46,7 @@ export default function ChatbotSection({ onUpdate }: ChatbotSectionProps) {
             type="number"
             placeholder="e.g. 15"
             onChange={(e) =>
-              onUpdate({ costPerInquiry: parseFloat(e.target.value) || 0 })
+              onUpdate({ costPerInquiry: e.target.value || "0" })
             }
           />
         </div>
@@ -64,7 +64,7 @@ export default function ChatbotSection({ onUpdate }: ChatbotSectionProps) {
           max={80}
           step={1}
           onValueChange={(value) => {
-            onUpdate({ chatbotImprovementPct: value[0] });
+            onUpdate({ chatbotImprovementPct: value[0].toString() });
             const label = document.getElementById("chatbot-improvement");
             if (label) label.textContent = `${value[0]}%`;
           }}

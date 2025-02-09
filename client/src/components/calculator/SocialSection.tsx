@@ -22,7 +22,7 @@ export default function SocialSection({ onUpdate }: SocialSectionProps) {
             type="number"
             placeholder="e.g. 5000"
             onChange={(e) =>
-              onUpdate({ monthlyContentSpend: parseFloat(e.target.value) || 0 })
+              onUpdate({ monthlyContentSpend: e.target.value || "0" })
             }
           />
         </div>
@@ -52,7 +52,7 @@ export default function SocialSection({ onUpdate }: SocialSectionProps) {
           max={70}
           step={1}
           onValueChange={(value) => {
-            onUpdate({ socialImprovementPct: value[0] });
+            onUpdate({ socialImprovementPct: value[0].toString() });
             const label = document.getElementById("social-improvement");
             if (label) label.textContent = `${value[0]}%`;
           }}

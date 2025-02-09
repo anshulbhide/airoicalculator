@@ -34,7 +34,7 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
             type="number"
             placeholder="e.g. 20"
             onChange={(e) =>
-              onUpdate({ currentOpenRate: parseFloat(e.target.value) || 0 })
+              onUpdate({ currentOpenRate: e.target.value || "0" })
             }
           />
         </div>
@@ -46,7 +46,7 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
             type="number"
             placeholder="e.g. 2"
             onChange={(e) =>
-              onUpdate({ currentConversionRate: parseFloat(e.target.value) || 0 })
+              onUpdate({ currentConversionRate: e.target.value || "0" })
             }
           />
         </div>
@@ -58,7 +58,7 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
             type="number"
             placeholder="e.g. 100"
             onChange={(e) =>
-              onUpdate({ averageOrderValue: parseFloat(e.target.value) || 0 })
+              onUpdate({ averageOrderValue: e.target.value || "0" })
             }
           />
         </div>
@@ -76,7 +76,7 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
           max={30}
           step={1}
           onValueChange={(value) => {
-            onUpdate({ emailImprovementPct: value[0] });
+            onUpdate({ emailImprovementPct: value[0].toString() });
             const label = document.getElementById("improvement-value");
             if (label) label.textContent = `${value[0]}%`;
           }}

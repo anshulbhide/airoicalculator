@@ -54,7 +54,7 @@ export default function ProductSection({ onUpdate }: ProductSectionProps) {
           max={90}
           step={1}
           onValueChange={(value) => {
-            onUpdate({ productImprovementPct: value[0] });
+            onUpdate({ productImprovementPct: value[0].toString() });
             const label = document.getElementById("product-improvement");
             if (label) label.textContent = `${value[0]}%`;
           }}
