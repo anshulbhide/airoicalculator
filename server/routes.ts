@@ -47,6 +47,7 @@ export function registerRoutes(app: Express) {
 
       const totalBenefits = emailRevenue + socialSavings + chatbotSavings + productSavings;
       const roi = calculateROI(totalBenefits);
+      const paybackMonths = calculatePaybackPeriod(totalBenefits);
 
       // Save results
       const results = await storage.saveResults({
@@ -56,7 +57,8 @@ export function registerRoutes(app: Express) {
         chatbotSavings: chatbotSavings.toFixed(2),
         productSavings: productSavings.toFixed(2),
         totalBenefits: totalBenefits.toFixed(2),
-        roi: roi.toFixed(2)
+        roi: roi.toFixed(2),
+        paybackMonths: paybackMonths.toFixed(2)
       });
 
       res.json({ id: calculator.id });

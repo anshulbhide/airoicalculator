@@ -1,3 +1,6 @@
+import { pgTable, text, serial, integer, decimal } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { z } from "zod";
 
 export function calculateEmailRevenue(
   listSize: number,
@@ -42,4 +45,9 @@ export function calculateProductSavings(
 
 export function calculateROI(totalBenefits: number, investmentCost: number = 50000): number {
   return ((totalBenefits - investmentCost) / investmentCost) * 100;
+}
+
+export function calculatePaybackPeriod(totalBenefits: number, investmentCost: number = 50000): number {
+  const monthlyBenefits = totalBenefits / 12;
+  return monthlyBenefits > 0 ? investmentCost / monthlyBenefits : 999; // Return large number if no benefits
 }
