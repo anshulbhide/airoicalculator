@@ -4,16 +4,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ResultsChart from "@/components/calculator/ResultsChart";
 import { Download, Mail } from "lucide-react";
+import type { Calculator, Results } from "@shared/schema";
 
 export default function Results() {
   const { id } = useParams();
 
-  const { data: calculator } = useQuery({
+  const { data: calculator } = useQuery<Calculator>({
     queryKey: [`/api/calculator/${id}`],
     enabled: !!id
   });
 
-  const { data: results } = useQuery({
+  const { data: results } = useQuery<Results>({
     queryKey: [`/api/results/${id}`],
     enabled: !!id
   });
@@ -43,7 +44,7 @@ export default function Results() {
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold text-primary">
-                ${results.emailRevenue.toLocaleString()}
+                ${parseFloat(results.emailRevenue).toLocaleString()}
               </p>
               <p className="text-sm text-muted-foreground">Additional Annual Revenue</p>
             </CardContent>
@@ -55,7 +56,7 @@ export default function Results() {
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold text-primary">
-                ${results.socialSavings.toLocaleString()}
+                ${parseFloat(results.socialSavings).toLocaleString()}
               </p>
               <p className="text-sm text-muted-foreground">Annual Cost Reduction</p>
             </CardContent>
@@ -67,7 +68,7 @@ export default function Results() {
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold text-primary">
-                ${results.chatbotSavings.toLocaleString()}
+                ${parseFloat(results.chatbotSavings).toLocaleString()}
               </p>
               <p className="text-sm text-muted-foreground">Annual Support Savings</p>
             </CardContent>
@@ -79,7 +80,7 @@ export default function Results() {
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold text-primary">
-                ${results.productSavings.toLocaleString()}
+                ${parseFloat(results.productSavings).toLocaleString()}
               </p>
               <p className="text-sm text-muted-foreground">Annual Content Savings</p>
             </CardContent>
@@ -94,18 +95,18 @@ export default function Results() {
           <CardContent className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <h3 className="text-2xl font-bold">{results.roi.toFixed(1)}%</h3>
+                <h3 className="text-2xl font-bold">{parseFloat(results.roi).toFixed(1)}%</h3>
                 <p className="text-muted-foreground">Return on Investment</p>
               </div>
               <div>
                 <h3 className="text-2xl font-bold">
-                  ${results.totalBenefits.toLocaleString()}
+                  ${parseFloat(results.totalBenefits).toLocaleString()}
                 </h3>
                 <p className="text-muted-foreground">Total Annual Benefits</p>
               </div>
               <div>
                 <h3 className="text-2xl font-bold">
-                  {results.paybackMonths.toFixed(1)} months
+                  {parseFloat(results.paybackMonths).toFixed(1)} months
                 </h3>
                 <p className="text-muted-foreground">Payback Period</p>
               </div>
