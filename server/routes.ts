@@ -49,6 +49,17 @@ export function registerRoutes(app: Express) {
       const roi = calculateROI(totalBenefits);
       const paybackMonths = calculatePaybackPeriod(totalBenefits);
 
+      console.log("Saving results:", {
+        calculatorId: calculator.id,
+        emailRevenue,
+        socialSavings,
+        chatbotSavings,
+        productSavings,
+        totalBenefits,
+        roi,
+        paybackMonths
+      }); // Debug log
+
       // Save results
       const results = await storage.saveResults({
         calculatorId: calculator.id,
@@ -64,7 +75,7 @@ export function registerRoutes(app: Express) {
       res.json({ id: calculator.id });
 
     } catch (error) {
-      console.error("Validation error:", error); // Debug log
+      console.error("Error processing calculator:", error); // Debug log
       res.status(400).json({ error: "Invalid input data", details: error });
     }
   });

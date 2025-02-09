@@ -47,7 +47,8 @@ export const results = pgTable("results", {
   chatbotSavings: decimal("chatbot_savings", { precision: 20, scale: 2 }).notNull(),
   productSavings: decimal("product_savings", { precision: 20, scale: 2 }).notNull(),
   totalBenefits: decimal("total_benefits", { precision: 20, scale: 2 }).notNull(),
-  roi: decimal("roi", { precision: 20, scale: 2 }).notNull()
+  roi: decimal("roi", { precision: 20, scale: 2 }).notNull(),
+  paybackMonths: decimal("payback_months", { precision: 10, scale: 2 }).notNull()
 });
 
 export const insertResultsSchema = createInsertSchema(results);
