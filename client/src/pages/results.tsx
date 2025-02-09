@@ -104,12 +104,7 @@ export default function Results() {
                 </h3>
                 <p className="text-muted-foreground">Total Annual Benefits</p>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold">
-                  {parseFloat(results.paybackMonths).toFixed(1)} months
-                </h3>
-                <p className="text-muted-foreground">Payback Period</p>
-              </div>
+              
             </div>
           </CardContent>
         </Card>

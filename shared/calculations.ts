@@ -1,3 +1,4 @@
+
 export function calculateEmailRevenue(
   listSize: number,
   currentConversion: number,
@@ -41,9 +42,4 @@ export function calculateProductSavings(
 
 export function calculateROI(totalBenefits: number, investmentCost: number = 50000): number {
   return ((totalBenefits - investmentCost) / investmentCost) * 100;
-}
-
-export function calculatePaybackPeriod(totalBenefits: number, investmentCost: number = 50000): number {
-  const monthlyBenefits = totalBenefits / 12;
-  return investmentCost / monthlyBenefits;
 }
