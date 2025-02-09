@@ -19,10 +19,12 @@ export class DatabaseStorage implements IStorage {
   }
 
   async saveResults(resultsData: InsertResults): Promise<Results> {
+    console.log("Saving results:", resultsData); // Debug log
     const [result] = await db
       .insert(results)
       .values(resultsData)
       .returning();
+    console.log("Saved results:", result); // Debug log
     return result;
   }
 
@@ -35,10 +37,12 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getResultsById(id: number): Promise<Results | undefined> {
+    console.log("Fetching results for calculator ID:", id); // Debug log
     const [result] = await db
       .select()
       .from(results)
-      .where(eq(results.id, id));
+      .where(eq(results.calculatorId, id));
+    console.log("Found results:", result); // Debug log
     return result;
   }
 }

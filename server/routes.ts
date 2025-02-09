@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { insertCalculatorSchema, insertResultsSchema } from "@shared/schema";
+import { insertCalculatorSchema } from "@shared/schema";
 import PDFDocument from "pdfkit";
 import { 
   calculateEmailRevenue,
@@ -61,7 +61,8 @@ export function registerRoutes(app: Express) {
         paybackMonths: paybackMonths.toFixed(2)
       });
 
-      res.json({ id: calculator.id, results: results.id });
+      res.json({ id: calculator.id });
+
     } catch (error) {
       console.error("Validation error:", error); // Debug log
       res.status(400).json({ error: "Invalid input data", details: error });
