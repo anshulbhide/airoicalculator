@@ -16,20 +16,38 @@ import type { InsertCalculator } from "@shared/schema";
 export default function Calculator() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
-  const [formData, setFormData] = useState<Partial<InsertCalculator>>({});
-  
+  const [formData, setFormData] = useState<Partial<InsertCalculator>>({
+    emailListSize: 0,
+    currentOpenRate: "0",
+    currentConversionRate: "0",
+    averageOrderValue: "0",
+    monthlyContentSpend: "0",
+    contentCreationHours: 0,
+    monthlyVisitors: 0,
+    supportTicketVolume: 0,
+    costPerInquiry: "0",
+    numberOfProducts: 0,
+    descriptionUpdateTime: 0,
+    emailImprovementPct: "15",
+    socialImprovementPct: "40",
+    chatbotImprovementPct: "50",
+    productImprovementPct: "60"
+  });
+
   const mutation = useMutation({
     mutationFn: async (data: InsertCalculator) => {
+      console.log("Submitting data:", data); // Debug log
       const res = await apiRequest("POST", "/api/calculator", data);
       return res.json();
     },
     onSuccess: (data) => {
       setLocation(`/results/${data.id}`);
     },
-    onError: () => {
+    onError: (error) => {
+      console.error("Submission error:", error); // Debug log
       toast({
         title: "Error",
-        description: "Failed to save calculator data",
+        description: "Failed to save calculator data. Please make sure all fields are filled.",
         variant: "destructive"
       });
     }
@@ -40,7 +58,7 @@ export default function Calculator() {
   };
 
   const handleSubmit = () => {
-    if (!formData.companyName || !formData.email) {
+    if (!formData.companyName || !formData.email || !formData.industry) {
       toast({
         title: "Missing Information",
         description: "Please fill out company details first",
@@ -48,7 +66,23 @@ export default function Calculator() {
       });
       return;
     }
-    mutation.mutate(formData as InsertCalculator);
+
+    // Ensure all required fields are present and convert string numbers to proper format
+    const submitData = {
+      ...formData,
+      currentOpenRate: formData.currentOpenRate || "0",
+      currentConversionRate: formData.currentConversionRate || "0",
+      averageOrderValue: formData.averageOrderValue || "0",
+      monthlyContentSpend: formData.monthlyContentSpend || "0",
+      costPerInquiry: formData.costPerInquiry || "0",
+      emailImprovementPct: formData.emailImprovementPct || "15",
+      socialImprovementPct: formData.socialImprovementPct || "40",
+      chatbotImprovementPct: formData.chatbotImprovementPct || "50",
+      productImprovementPct: formData.productImprovementPct || "60",
+    } as InsertCalculator;
+
+    console.log("Form data before submission:", submitData); // Debug log
+    mutation.mutate(submitData);
   };
 
   return (
@@ -78,15 +112,15 @@ export default function Calculator() {
               <TabsContent value="email">
                 <EmailSection onUpdate={updateFormData} />
               </TabsContent>
-              
+
               <TabsContent value="social">
                 <SocialSection onUpdate={updateFormData} />
               </TabsContent>
-              
+
               <TabsContent value="chatbot">
                 <ChatbotSection onUpdate={updateFormData} />
               </TabsContent>
-              
+
               <TabsContent value="product">
                 <ProductSection onUpdate={updateFormData} />
               </TabsContent>
