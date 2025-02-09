@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ResultsChart from "@/components/calculator/ResultsChart";
-import { Download, Mail } from "lucide-react";
+import { Download, Mail, RotateCcw } from "lucide-react";
 import type { Calculator, Results } from "@shared/schema";
 
 export default function Results() {
@@ -121,6 +121,14 @@ export default function Results() {
           >
             <Download className="mr-2 h-4 w-4" />
             Download Full Report
+          </Button>
+          <Button 
+            size="lg" 
+            variant="outline"
+            onClick={() => window.location.href = '/'}
+          >
+            <RotateCcw className="mr-2 h-4 w-4" />
+            Start Over
           </Button>
           <Button size="lg" variant="outline">
             <Mail className="mr-2 h-4 w-4" />

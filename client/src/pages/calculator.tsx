@@ -12,31 +12,35 @@ import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { InsertCalculator } from "@shared/schema";
+import { RotateCcw } from "lucide-react";
+
+// Initial form state
+const initialFormState: Partial<InsertCalculator> = {
+  emailListSize: 0,
+  currentOpenRate: "0",
+  currentConversionRate: "0",
+  averageOrderValue: "0",
+  monthlyContentSpend: "0",
+  contentCreationHours: 0,
+  monthlyVisitors: 0,
+  supportTicketVolume: 0,
+  costPerInquiry: "0",
+  numberOfProducts: 0,
+  descriptionUpdateTime: 0,
+  emailImprovementPct: "15",
+  socialImprovementPct: "40",
+  chatbotImprovementPct: "50",
+  productImprovementPct: "60"
+};
 
 export default function Calculator() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
-  const [formData, setFormData] = useState<Partial<InsertCalculator>>({
-    emailListSize: 0,
-    currentOpenRate: "0",
-    currentConversionRate: "0",
-    averageOrderValue: "0",
-    monthlyContentSpend: "0",
-    contentCreationHours: 0,
-    monthlyVisitors: 0,
-    supportTicketVolume: 0,
-    costPerInquiry: "0",
-    numberOfProducts: 0,
-    descriptionUpdateTime: 0,
-    emailImprovementPct: "15",
-    socialImprovementPct: "40",
-    chatbotImprovementPct: "50",
-    productImprovementPct: "60"
-  });
+  const [formData, setFormData] = useState<Partial<InsertCalculator>>(initialFormState);
 
   const mutation = useMutation({
     mutationFn: async (data: InsertCalculator) => {
-      console.log("Submitting data:", data); // Debug log
+      console.log("Submitting data:", data);
       const res = await apiRequest("POST", "/api/calculator", data);
       return res.json();
     },
@@ -44,7 +48,7 @@ export default function Calculator() {
       setLocation(`/results/${data.id}`);
     },
     onError: (error) => {
-      console.error("Submission error:", error); // Debug log
+      console.error("Submission error:", error);
       toast({
         title: "Error",
         description: "Failed to save calculator data. Please make sure all fields are filled.",
@@ -57,6 +61,14 @@ export default function Calculator() {
     setFormData(prev => ({ ...prev, ...data }));
   };
 
+  const handleReset = () => {
+    setFormData(initialFormState);
+    toast({
+      title: "Reset Complete",
+      description: "All calculator inputs have been cleared."
+    });
+  };
+
   const handleSubmit = () => {
     if (!formData.companyName || !formData.email || !formData.industry) {
       toast({
@@ -67,7 +79,6 @@ export default function Calculator() {
       return;
     }
 
-    // Ensure all required fields are present and convert string numbers to proper format
     const submitData = {
       ...formData,
       currentOpenRate: formData.currentOpenRate || "0",
@@ -81,7 +92,7 @@ export default function Calculator() {
       productImprovementPct: formData.productImprovementPct || "60",
     } as InsertCalculator;
 
-    console.log("Form data before submission:", submitData); // Debug log
+    console.log("Form data before submission:", submitData);
     mutation.mutate(submitData);
   };
 
@@ -128,7 +139,15 @@ export default function Calculator() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <Button
+            variant="outline"
+            onClick={handleReset}
+            className="gap-2"
+          >
+            <RotateCcw className="h-4 w-4" />
+            Start Over
+          </Button>
           <Button
             size="lg"
             onClick={handleSubmit}
