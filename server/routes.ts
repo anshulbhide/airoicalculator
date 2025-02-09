@@ -3,6 +3,14 @@ import { createServer } from "http";
 import { storage } from "./storage";
 import { insertCalculatorSchema, insertResultsSchema } from "@shared/schema";
 import PDFDocument from "pdfkit";
+import { 
+  calculateEmailRevenue,
+  calculateSocialSavings,
+  calculateChatbotSavings,
+  calculateProductSavings,
+  calculateROI,
+  calculatePaybackPeriod
+} from "@shared/calculations";
 
 export function registerRoutes(app: Express) {
   app.post("/api/calculator", async (req, res) => {
@@ -10,7 +18,50 @@ export function registerRoutes(app: Express) {
       console.log("Received calculator data:", req.body); // Debug log
       const inputs = insertCalculatorSchema.parse(req.body);
       const calculator = await storage.saveCalculatorInputs(inputs);
-      res.json(calculator);
+
+      // Calculate all the results
+      const emailRevenue = calculateEmailRevenue(
+        inputs.emailListSize,
+        parseFloat(inputs.currentConversionRate),
+        parseFloat(inputs.averageOrderValue),
+        parseFloat(inputs.emailImprovementPct)
+      );
+
+      const socialSavings = calculateSocialSavings(
+        parseFloat(inputs.monthlyContentSpend),
+        inputs.contentCreationHours,
+        parseFloat(inputs.socialImprovementPct)
+      );
+
+      const chatbotSavings = calculateChatbotSavings(
+        inputs.supportTicketVolume,
+        parseFloat(inputs.costPerInquiry),
+        parseFloat(inputs.chatbotImprovementPct)
+      );
+
+      const productSavings = calculateProductSavings(
+        inputs.numberOfProducts,
+        inputs.descriptionUpdateTime,
+        parseFloat(inputs.productImprovementPct)
+      );
+
+      const totalBenefits = emailRevenue + socialSavings + chatbotSavings + productSavings;
+      const roi = calculateROI(totalBenefits);
+      const paybackMonths = calculatePaybackPeriod(totalBenefits);
+
+      // Save results
+      const results = await storage.saveResults({
+        calculatorId: calculator.id,
+        emailRevenue: emailRevenue.toFixed(2),
+        socialSavings: socialSavings.toFixed(2),
+        chatbotSavings: chatbotSavings.toFixed(2),
+        productSavings: productSavings.toFixed(2),
+        totalBenefits: totalBenefits.toFixed(2),
+        roi: roi.toFixed(2),
+        paybackMonths: paybackMonths.toFixed(2)
+      });
+
+      res.json({calculator, results}); //Corrected to return both calculator and results
     } catch (error) {
       console.error("Validation error:", error); // Debug log
       res.status(400).json({ error: "Invalid input data", details: error });
