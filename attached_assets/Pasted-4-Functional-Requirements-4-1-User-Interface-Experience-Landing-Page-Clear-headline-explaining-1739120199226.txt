@@ -1,0 +1,121 @@
+4. Functional Requirements
+4.1. User Interface & Experience
+Landing Page:
+
+Clear headline explaining the tool’s purpose.
+Brief overview of the four AI solutions.
+A short explainer video or infographic that illustrates how the calculator works.
+Interactive Input Form:
+
+General Business Metrics:
+Company name, industry, and contact details (for lead capture).
+Option to select which modules to calculate (one or more of the four solutions).
+Module-Specific Inputs:
+Personalized Email Campaigns:
+Email list size.
+Current open and conversion rates.
+Average order value.
+Expected improvement slider (e.g., +10% to +20% conversion uplift).
+Social Media Content Creation:
+Monthly spend on content creation.
+Hours/dedicated resource cost.
+Engagement metrics (optional baseline data).
+Expected efficiency improvement (slider for time or cost reduction).
+Chatbot & Virtual Assistants:
+Monthly website visitors.
+Current inquiry or support ticket volume.
+Average cost per inquiry (or time spent per inquiry).
+Expected improvement in conversion or cost reduction.
+Automated Product Descriptions:
+Number of SKUs/products.
+Current time/cost to update descriptions.
+Expected efficiency gains (slider to reflect improvement percentage).
+Interactive Assumption Sliders:
+
+Allow users to adjust expected improvement percentages for each module.
+Immediate real-time updates to the results as assumptions change.
+Results Page:
+
+Dynamic graphs and charts (bar graphs, line charts, payback period indicators) comparing the “current state” vs. “with AI” projections.
+A summary of:
+Incremental annual revenue gains.
+Cost savings (both time and money).
+ROI percentage and payback period.
+Option to download a detailed report (PDF).
+Clear call-to-action (e.g., “Schedule a Demo,” “Contact Us for More Information”).
+4.2. Calculation Engine
+Revenue Uplift Calculations:
+Email Campaigns:
+Additional Revenue
+=
+(
+Email List Size
+×
+Δ
+Conversion Rate
+)
+×
+Average Order Value
+×
+Email Frequency Factor
+Additional Revenue=(Email List Size×ΔConversion Rate)×Average Order Value×Email Frequency Factor
+Social Media:
+Estimate revenue gains from increased engagement and conversion improvements driven by improved content.
+Cost Savings Calculations:
+Content Creation Savings:
+Savings
+=
+Current Content Cost
+×
+Efficiency Improvement %
+Savings=Current Content Cost×Efficiency Improvement %
+Chatbot Efficiency:
+Savings
+=
+Monthly Inquiries
+×
+Average Handling Cost
+×
+Improvement %
+Savings=Monthly Inquiries×Average Handling Cost×Improvement %
+Product Description Automation:
+Savings
+=
+Current Cost per SKU Update
+×
+Number of SKUs
+×
+Efficiency Improvement %
+Savings=Current Cost per SKU Update×Number of SKUs×Efficiency Improvement %
+Combined Impact:
+Aggregate revenue uplift and cost savings across modules.
+Calculate ROI:
+ROI %
+=
+Total Benefits
+−
+AI Investment Cost
+AI Investment Cost
+×
+100
+ROI %= 
+AI Investment Cost
+Total Benefits−AI Investment Cost
+​
+ ×100
+Estimate payback period based on monthly or annual savings versus the projected cost of AI implementation.
+4.3. Data Output & Visualization
+Results Dashboard:
+Summaries per module and an overall combined view.
+Interactive charts (e.g., before/after comparisons, ROI curves).
+A “What-If” analysis feature allowing users to toggle different scenarios.
+Export Options:
+Downloadable PDF report.
+Option to email the report directly from the calculator.
+4.4. Lead Capture & Follow-Up
+Contact Information:
+Mandatory or optional fields for email and phone number to receive the report.
+Call-to-Action:
+Prominent button to “Schedule a Demo” or “Speak to an Expert” once the results are displayed.
+Data Privacy:
+Clear privacy policy notification regarding the handling of user inputs.
