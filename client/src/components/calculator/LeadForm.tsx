@@ -41,6 +41,16 @@ export default function LeadForm({ onUpdate }: LeadFormProps) {
           </div>
 
           <div className="space-y-2">
+            <Label htmlFor="email">Business Email</Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="you@company.com"
+              onChange={(e) => onUpdate({ email: e.target.value })}
+            />
+          </div>
+
+          <div className="space-y-2">
             <Label htmlFor="industry">Industry</Label>
             <Select onValueChange={(value) => onUpdate({ industry: value })}>
               <SelectTrigger id="industry">
@@ -54,16 +64,6 @@ export default function LeadForm({ onUpdate }: LeadFormProps) {
                 ))}
               </SelectContent>
             </Select>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="email">Business Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="you@company.com"
-              onChange={(e) => onUpdate({ email: e.target.value })}
-            />
           </div>
         </div>
       </CardContent>
