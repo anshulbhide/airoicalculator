@@ -152,12 +152,16 @@ export default function Results() {
       </div>
 
       <Dialog open={showCalendly} onOpenChange={setShowCalendly}>
-        <DialogContent className="max-w-4xl">
+        <DialogContent className="max-w-4xl" aria-describedby="calendly-description">
           <DialogHeader>
             <DialogTitle>Schedule a Demo</DialogTitle>
           </DialogHeader>
+          <div id="calendly-description" className="text-sm text-muted-foreground mb-4">
+            Schedule a 30-minute consultation to discuss how AI can benefit your business.
+          </div>
           <div 
-            className="calendly-inline-widget"
+            className="calendly-inline-widget" 
+            data-url="https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1"
             style={{ minWidth: "320px", height: "700px" }}
           />
         </DialogContent>
