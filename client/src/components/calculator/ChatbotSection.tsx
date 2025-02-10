@@ -13,7 +13,7 @@ export default function ChatbotSection({ onUpdate }: ChatbotSectionProps) {
   return (
     <div className="space-y-6">
       <div className="text-sm text-muted-foreground mb-6">
-        Estimate cost savings from implementing AI chatbots for customer support
+        Integrate LLM-powered chatbots on your website to handle FAQs, product recommendations, and instant B2B inquiries—improving customer experience and lead capture.
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

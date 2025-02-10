@@ -35,7 +35,7 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
   return (
     <div className="space-y-6">
       <div className="text-sm text-muted-foreground mb-6">
-        Input your current email marketing metrics to calculate potential AI-driven improvements
+        Use AI to automatically generate personalized emails for different customer segments, increasing open and click-through rates.
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -70,10 +70,14 @@ export default function Calculator() {
   };
 
   const handleSubmit = () => {
-    if (!formData.companyName || !formData.email || !formData.industry) {
+    // Only validate required fields when actually submitting
+    const requiredFields = ['companyName', 'email', 'industry'];
+    const missingFields = requiredFields.filter(field => !formData[field]);
+
+    if (missingFields.length > 0) {
       toast({
         title: "Missing Information",
-        description: "Please fill out company details first",
+        description: `Please fill out: ${missingFields.join(', ')}`,
         variant: "destructive"
       });
       return;
@@ -104,7 +108,7 @@ export default function Calculator() {
             AI Solutions ROI Calculator
           </h1>
           <p className="text-lg text-muted-foreground">
-            Discover the potential impact of AI on your business across four key areas
+            Discover the potential impact of AI on your business across by using this ROI calculator. Enter the metrics associated with your business and we'll calculate the potential ROI for you.
           </p>
         </div>
 

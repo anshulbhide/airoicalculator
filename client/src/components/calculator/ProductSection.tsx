@@ -13,7 +13,7 @@ export default function ProductSection({ onUpdate }: ProductSectionProps) {
   return (
     <div className="space-y-6">
       <div className="text-sm text-muted-foreground mb-6">
-        Calculate potential savings in product description management with AI
+        Use LLMs to generate or update product descriptions across multiple channels, ensuring consistency and SEO optimization.
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

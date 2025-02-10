@@ -13,7 +13,8 @@ export default function SocialSection({ onUpdate }: SocialSectionProps) {
   return (
     <div className="space-y-6">
       <div className="text-sm text-muted-foreground mb-6">
-        Calculate potential savings in social media content creation with AI assistance
+        Deploy LLMs to craft engaging social media posts and ad copies tailored to both direct consumers and wholesale buyers.
+
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
