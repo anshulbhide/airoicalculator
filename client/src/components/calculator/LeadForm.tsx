@@ -14,23 +14,13 @@ interface LeadFormProps {
   onUpdate: (data: Partial<InsertCalculator>) => void;
 }
 
-const industries = [
-  "Retail",
-  "E-commerce",
-  "Technology",
-  "Manufacturing",
-  "Healthcare",
-  "Financial Services",
-  "Education",
-  "Professional Services",
-  "Other"
-];
+
 
 export default function LeadForm({ onUpdate }: LeadFormProps) {
   return (
     <Card>
       <CardContent className="p-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <Label htmlFor="companyName">Company Name</Label>
             <Input
@@ -50,21 +40,7 @@ export default function LeadForm({ onUpdate }: LeadFormProps) {
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="industry">Industry</Label>
-            <Select onValueChange={(value) => onUpdate({ industry: value })}>
-              <SelectTrigger id="industry">
-                <SelectValue placeholder="Select your industry" />
-              </SelectTrigger>
-              <SelectContent>
-                {industries.map((industry) => (
-                  <SelectItem key={industry} value={industry}>
-                    {industry}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          
         </div>
       </CardContent>
     </Card>
