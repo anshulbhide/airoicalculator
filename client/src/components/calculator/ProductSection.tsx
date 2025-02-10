@@ -47,9 +47,7 @@ export default function ProductSection({ onUpdate }: ProductSectionProps) {
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground">
-        AI-powered content generation can reduce product description creation time by 20%
-      </p>
+
     </div>
   );
 }

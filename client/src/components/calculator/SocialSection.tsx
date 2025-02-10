@@ -45,9 +45,7 @@ export default function SocialSection({ onUpdate }: SocialSectionProps) {
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground">
-        Our AI-powered content creation tools reduce content creation time and costs by 20%
-      </p>
+
     </div>
   );
 }

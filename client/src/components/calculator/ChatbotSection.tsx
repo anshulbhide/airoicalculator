@@ -57,9 +57,7 @@ export default function ChatbotSection({ onUpdate }: ChatbotSectionProps) {
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground">
-        AI chatbots can handle 20% of routine customer inquiries automatically
-      </p>
+
     </div>
   );
 }
