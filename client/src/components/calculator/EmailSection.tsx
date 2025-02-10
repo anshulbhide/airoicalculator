@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Select } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { InsertCalculator } from "@shared/schema";
 import React, { useState, useEffect } from 'react';
 
@@ -90,16 +90,21 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
         </div>
         <div className="space-y-2">
           <Label htmlFor="industry">Industry</Label>
-          <Select id="industry" onChange={handleIndustryChange}>
-            <option value="">Select Industry</option>
-            <option value="Retail">Retail</option>
-            <option value="Ecommerce">Ecommerce</option>
-            <option value="Tech">Tech</option>
-            <option value="Manufacturing">Manufacturing</option>
-            <option value="Healthcare">Healthcare</option>
-            <option value="Education">Education</option>
-            <option value="Financial Services">Financial Services</option>
-            <option value="Professional Services">Professional Services</option>
+          <Select onValueChange={handleIndustryChange}>
+            <SelectTrigger id="industry">
+              <SelectValue placeholder="Select Industry" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">Select Industry</SelectItem>
+              <SelectItem value="Retail">Retail</SelectItem>
+              <SelectItem value="Ecommerce">Ecommerce</SelectItem>
+              <SelectItem value="Tech">Tech</SelectItem>
+              <SelectItem value="Manufacturing">Manufacturing</SelectItem>
+              <SelectItem value="Healthcare">Healthcare</SelectItem>
+              <SelectItem value="Education">Education</SelectItem>
+              <SelectItem value="Financial Services">Financial Services</SelectItem>
+              <SelectItem value="Professional Services">Professional Services</SelectItem>
+            </SelectContent>
           </Select>
         </div>
       </div>
