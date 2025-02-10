@@ -8,10 +8,7 @@ interface SocialSectionProps {
 }
 
 export default function SocialSection({ onUpdate }: SocialSectionProps) {
-  // Set fixed 20% improvement when component mounts
-  React.useEffect(() => {
-    onUpdate({ socialImprovementPct: "20" });
-  }, [onUpdate]);
+  // Improvement percentage will be set based on industry
 
   return (
     <div className="space-y-6">

@@ -18,6 +18,12 @@ export function registerRoutes(app: Express) {
       console.log("Received calculator data:", req.body); // Debug log
       const inputs = insertCalculatorSchema.parse(req.body);
       const calculator = await storage.saveCalculatorInputs(inputs);
+      
+      const improvementPct = getImprovementPercentage(inputs.industry);
+      inputs.emailImprovementPct = improvementPct.toString();
+      inputs.socialImprovementPct = improvementPct.toString();
+      inputs.chatbotImprovementPct = improvementPct.toString();
+      inputs.productImprovementPct = improvementPct.toString();
 
       // Calculate all the results
       const emailRevenue = calculateEmailRevenue(

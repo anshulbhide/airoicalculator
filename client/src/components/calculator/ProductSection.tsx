@@ -8,10 +8,7 @@ interface ProductSectionProps {
 }
 
 export default function ProductSection({ onUpdate }: ProductSectionProps) {
-  // Set fixed 20% improvement when component mounts
-  React.useEffect(() => {
-    onUpdate({ productImprovementPct: "20" });
-  }, [onUpdate]);
+  // Improvement percentage will be set based on industry
 
   return (
     <div className="space-y-6">

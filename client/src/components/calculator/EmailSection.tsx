@@ -1,17 +1,38 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import type { InsertCalculator } from "@shared/schema";
-import React, {useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface EmailSectionProps {
   onUpdate: (data: Partial<InsertCalculator>) => void;
 }
 
 export default function EmailSection({ onUpdate }: EmailSectionProps) {
-  // Set fixed 20% improvement when component mounts
+  const [selectedIndustry, setSelectedIndustry] = useState('');
+  const [emailImprovementPct, setEmailImprovementPct] = useState("20"); //default value
+
+  const industrySavings = {
+    "Retail": "20",
+    "Ecommerce": "25",
+    "Tech": "32.5",
+    "Manufacturing": "15",
+    "Healthcare": "22.5",
+    "Education": "25",
+    "Financial Services": "20",
+    "Professional Services": "32.5"
+  };
+
+
   useEffect(() => {
-    onUpdate({ emailImprovementPct: "20" });
-  }, [onUpdate]);
+    onUpdate({ emailImprovementPct });
+  }, [emailImprovementPct, onUpdate]);
+
+  const handleIndustryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedIndustry = e.target.value;
+    setSelectedIndustry(selectedIndustry);
+    setEmailImprovementPct(industrySavings[selectedIndustry] || "20"); //default to 20 if industry not found
+  };
 
   return (
     <div className="space-y-6">
@@ -67,9 +88,23 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
             }
           />
         </div>
+        <div className="space-y-2">
+          <Label htmlFor="industry">Industry</Label>
+          <Select id="industry" onChange={handleIndustryChange}>
+            <option value="">Select Industry</option>
+            <option value="Retail">Retail</option>
+            <option value="Ecommerce">Ecommerce</option>
+            <option value="Tech">Tech</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Education">Education</option>
+            <option value="Financial Services">Financial Services</option>
+            <option value="Professional Services">Professional Services</option>
+          </Select>
+        </div>
       </div>
 
-      
+
     </div>
   );
 }

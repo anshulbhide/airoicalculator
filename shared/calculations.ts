@@ -66,3 +66,17 @@ export function calculatePaybackPeriod(totalBenefits: number, investmentCost: nu
   const monthlyBenefits = totalBenefits / 12;
   return investmentCost / monthlyBenefits;
 }
+const INDUSTRY_IMPROVEMENTS: { [key: string]: number } = {
+  'Retail': 20,
+  'E-commerce': 25,
+  'Technology': 32.5,
+  'Manufacturing': 15,
+  'Healthcare': 22.5,
+  'Education': 25,
+  'Financial Services': 20,
+  'Professional Services': 32.5
+};
+
+export function getImprovementPercentage(industry: string): number {
+  return INDUSTRY_IMPROVEMENTS[industry] || 20; // Default to 20% if industry not found
+}
