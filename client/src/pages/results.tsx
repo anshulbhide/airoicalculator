@@ -5,29 +5,12 @@ import { Button } from "@/components/ui/button";
 import ResultsChart from "@/components/calculator/ResultsChart";
 import { Download, Mail, RotateCcw } from "lucide-react";
 import type { Calculator, Results } from "@shared/schema";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { useState, useEffect } from "react";
 
 export default function Results() {
   const { id } = useParams();
-  const [showCalendly, setShowCalendly] = useState(false);
-
-  // Initialize Calendly when the dialog opens
-  useEffect(() => {
-    if (showCalendly && window.Calendly) {
-      window.Calendly.initInlineWidget({
-        url: 'https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1',
-        parentElement: document.querySelector('.calendly-inline-widget'),
-        prefill: {},
-        utm: {}
-      });
-    }
-  }, [showCalendly]);
+  const scrollToCalendly = () => {
+    document.getElementById('calendly-widget')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const { data: calculator } = useQuery<Calculator>({
     queryKey: [`/api/calculator/${id}`],
@@ -143,29 +126,18 @@ export default function Results() {
           <Button 
             size="lg" 
             variant="outline"
-            onClick={() => setShowCalendly(true)}
+            onClick={scrollToCalendly}
           >
             <Mail className="mr-2 h-4 w-4" />
             Schedule a Demo
           </Button>
         </div>
-      </div>
 
-      <Dialog open={showCalendly} onOpenChange={setShowCalendly}>
-        <DialogContent className="max-w-4xl" aria-describedby="calendly-description">
-          <DialogHeader>
-            <DialogTitle>Schedule a Demo</DialogTitle>
-          </DialogHeader>
-          <div id="calendly-description" className="text-sm text-muted-foreground mb-4">
-            Schedule a 30-minute consultation to discuss how AI can benefit your business.
-          </div>
-          <div 
-            className="calendly-inline-widget" 
-            data-url="https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1"
-            style={{ minWidth: "320px", height: "700px" }}
-          />
-        </DialogContent>
-      </Dialog>
+        <div id="calendly-widget" className="pt-8">
+          <div className="calendly-inline-widget" data-url="https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1" style={{ minWidth: "320px", height: "700px" }}></div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
+      </div>
     </div>
   );
 }
