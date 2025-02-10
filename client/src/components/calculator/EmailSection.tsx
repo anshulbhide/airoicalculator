@@ -69,9 +69,7 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground">
-        Our AI-powered email campaigns typically achieve a 20% improvement in conversion rates
-      </p>
+      
     </div>
   );
 }
