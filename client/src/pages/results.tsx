@@ -5,9 +5,17 @@ import { Button } from "@/components/ui/button";
 import ResultsChart from "@/components/calculator/ResultsChart";
 import { Download, Mail, RotateCcw } from "lucide-react";
 import type { Calculator, Results } from "@shared/schema";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 export default function Results() {
   const { id } = useParams();
+  const [showCalendly, setShowCalendly] = useState(false);
 
   const { data: calculator } = useQuery<Calculator>({
     queryKey: [`/api/calculator/${id}`],
@@ -33,7 +41,7 @@ export default function Results() {
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold">Your AI ROI Analysis</h1>
           <p className="text-lg text-muted-foreground">
-            Here's how AI solutions could impact {calculator.companyName}
+            Here's how much money adopting a Gen AI Solution could save {calculator.companyName}
           </p>
         </div>
 
@@ -120,12 +128,29 @@ export default function Results() {
             <RotateCcw className="mr-2 h-4 w-4" />
             Start Over
           </Button>
-          <Button size="lg" variant="outline">
+          <Button 
+            size="lg" 
+            variant="outline"
+            onClick={() => setShowCalendly(true)}
+          >
             <Mail className="mr-2 h-4 w-4" />
             Schedule a Demo
           </Button>
         </div>
       </div>
+
+      <Dialog open={showCalendly} onOpenChange={setShowCalendly}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>Schedule a Demo</DialogTitle>
+          </DialogHeader>
+          <div 
+            className="calendly-inline-widget" 
+            data-url="https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1" 
+            style={{ minWidth: "320px", height: "700px" }}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
