@@ -66,7 +66,8 @@ export function calculatePaybackPeriod(totalBenefits: number, investmentCost: nu
   const monthlyBenefits = totalBenefits / 12;
   return investmentCost / monthlyBenefits;
 }
-const INDUSTRY_IMPROVEMENTS: { [key: string]: number } = {
+
+export const INDUSTRY_IMPROVEMENTS: { [key: string]: number } = {
   'Retail': 20,
   'E-commerce': 25,
   'Technology': 32.5,
