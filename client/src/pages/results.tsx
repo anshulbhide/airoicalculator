@@ -11,11 +11,23 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Results() {
   const { id } = useParams();
   const [showCalendly, setShowCalendly] = useState(false);
+
+  // Initialize Calendly when the dialog opens
+  useEffect(() => {
+    if (showCalendly && window.Calendly) {
+      window.Calendly.initInlineWidget({
+        url: 'https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1',
+        parentElement: document.querySelector('.calendly-inline-widget'),
+        prefill: {},
+        utm: {}
+      });
+    }
+  }, [showCalendly]);
 
   const { data: calculator } = useQuery<Calculator>({
     queryKey: [`/api/calculator/${id}`],
@@ -145,8 +157,7 @@ export default function Results() {
             <DialogTitle>Schedule a Demo</DialogTitle>
           </DialogHeader>
           <div 
-            className="calendly-inline-widget" 
-            data-url="https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1" 
+            className="calendly-inline-widget"
             style={{ minWidth: "320px", height: "700px" }}
           />
         </DialogContent>
