@@ -93,18 +93,13 @@ export default function Results() {
 
         <Card>
           <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <h3 className="text-2xl font-bold">{parseFloat(results.roi).toFixed(1)}%</h3>
-                <p className="text-muted-foreground">Return on Investment</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-2xl font-bold">
                   ${parseFloat(results.totalBenefits).toLocaleString()}
                 </h3>
                 <p className="text-muted-foreground">Total Annual Benefits</p>
               </div>
-              
             </div>
           </CardContent>
         </Card>
