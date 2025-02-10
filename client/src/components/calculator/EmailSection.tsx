@@ -9,29 +9,27 @@ interface EmailSectionProps {
 }
 
 export default function EmailSection({ onUpdate }: EmailSectionProps) {
-  const [selectedIndustry, setSelectedIndustry] = useState('');
   const [emailImprovementPct, setEmailImprovementPct] = useState("20"); //default value
 
-  const industrySavings = {
+  const industrySavings: { [key: string]: string } = {
     "Retail": "20",
-    "Ecommerce": "25",
-    "Tech": "32.5",
+    "E-commerce": "25",
+    "Technology": "32.5",
     "Manufacturing": "15",
     "Healthcare": "22.5",
     "Education": "25",
     "Financial Services": "20",
-    "Professional Services": "32.5"
+    "Professional Services": "32.5",
+    "Other": "20"
   };
-
 
   useEffect(() => {
     onUpdate({ emailImprovementPct });
   }, [emailImprovementPct, onUpdate]);
 
-  const handleIndustryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedIndustry = e.target.value;
-    setSelectedIndustry(selectedIndustry);
-    setEmailImprovementPct(industrySavings[selectedIndustry] || "20"); //default to 20 if industry not found
+  const handleIndustryChange = (value: string) => {
+    setEmailImprovementPct(industrySavings[value] || "20"); //default to 20 if industry not found
+    onUpdate({ industry: value });
   };
 
   return (
@@ -95,21 +93,19 @@ export default function EmailSection({ onUpdate }: EmailSectionProps) {
               <SelectValue placeholder="Select Industry" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Select Industry</SelectItem>
               <SelectItem value="Retail">Retail</SelectItem>
-              <SelectItem value="Ecommerce">Ecommerce</SelectItem>
-              <SelectItem value="Tech">Tech</SelectItem>
+              <SelectItem value="E-commerce">E-commerce</SelectItem>
+              <SelectItem value="Technology">Technology</SelectItem>
               <SelectItem value="Manufacturing">Manufacturing</SelectItem>
               <SelectItem value="Healthcare">Healthcare</SelectItem>
               <SelectItem value="Education">Education</SelectItem>
               <SelectItem value="Financial Services">Financial Services</SelectItem>
               <SelectItem value="Professional Services">Professional Services</SelectItem>
+              <SelectItem value="Other">Other</SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
-
-
     </div>
   );
 }
