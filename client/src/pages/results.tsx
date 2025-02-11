@@ -124,10 +124,10 @@ export default function Results() {
           <Button 
             size="lg" 
             variant="outline"
-            onClick={() => window.location.href = 'mailto:anshulbhide@gmail.com'}
+            onClick={() => window.location.href = 'https://calendly.com/anshulbhide/30min'}
           >
-            <Mail className="mr-2 h-4 w-4" />
-            Contact Us
+            <span className="mr-2">🕐</span>
+            Schedule a Workshop
           </Button>
         </div>
 
