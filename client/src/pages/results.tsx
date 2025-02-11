@@ -8,7 +8,7 @@ import type { Calculator, Results } from "@shared/schema";
 
 export default function Results() {
   const { id } = useParams();
-  
+
 
   const { data: calculator } = useQuery<Calculator>({
     queryKey: [`/api/calculator/${id}`],
@@ -129,6 +129,10 @@ export default function Results() {
             <Mail className="mr-2 h-4 w-4" />
             Contact Us
           </Button>
+        </div>
+
+        <div className="mt-12">
+          <div className="calendly-inline-widget" data-url="https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1" style={{minWidth: 320, height: 700}}></div>
         </div>
       </div>
     </div>
