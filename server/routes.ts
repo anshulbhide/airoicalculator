@@ -14,7 +14,7 @@ import {
   getImprovementPercentage
 } from "@shared/calculations";
 import OpenAI from "openai";
-import { ChatOpenAI } from "langchain/chat_models/openai";
+import { ChatOpenAI } from "@langchain/openai";
 
 
 const LANGSMITH_TRACING = true;
