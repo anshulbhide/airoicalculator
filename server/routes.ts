@@ -182,6 +182,12 @@ export function registerRoutes(app: Express) {
   Assessment Responses:
   ${responsesJson}
 
+  Please analyze the responses where each answer is scored 1-4, with 4 being the highest. Convert these scores to percentages where:
+  - Score of 1 = 25%
+  - Score of 2 = 50%
+  - Score of 3 = 75%
+  - Score of 4 = 100%
+
   Please provide the analysis in the following JSON format:
   {
     "overall_score": number (0-100),
