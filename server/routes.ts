@@ -184,12 +184,12 @@ export function registerRoutes(app: Express) {
 
   Please provide the analysis in the following JSON format:
   {
-    "overall_score": number (1-10),
+    "overall_score": number (1-4),
     "readiness_level": "string (one of: 'Not Ready', 'Early Stage', 'Developing', 'Advanced', 'Fully Prepared')",
     "dimension_scores": {
-      "data_infrastructure": number (1-10),
-      "process_automation": number (1-10),
-      "tech_capabilities": number (1-10)
+      "data_infrastructure": number (1-4),
+      "process_automation": number (1-4),
+      "tech_capabilities": number (1-4)
     },
     "key_strengths": ["string"],
     "improvement_areas": ["string"],
