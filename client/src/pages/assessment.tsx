@@ -87,14 +87,16 @@ const questions = {
   ],
 };
 
-const formSchema = z.object(
-  Object.entries(questions).reduce((acc, [section, sectionQuestions]) => {
+const formSchema = z.object({
+  ...Object.entries(questions).reduce((acc, [section, sectionQuestions]) => {
     sectionQuestions.forEach((q) => {
       acc[q.id] = z.string();
     });
     return acc;
-  }, {} as Record<string, z.ZodString>)
-);
+  }, {} as Record<string, z.ZodString>),
+  digitalTools: z.string(),
+  apiIntegration: z.string()
+});
 
 type FormValues = z.infer<typeof formSchema>;
 
