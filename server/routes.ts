@@ -15,11 +15,11 @@ import {
 } from "@shared/calculations";
 import OpenAI from "openai";
 
-LANGSMITH_TRACING=true
-LANGSMITH_ENDPOINT="https://api.smith.langchain.com"
-LANGSMITH_API_KEY= process.env['LANGSMITH_API_KEY']
-LANGSMITH_PROJECT="airoicalculator"
-OPENAI_API_KEY=process.env['OPENAI_API_KEY']
+const LANGSMITH_TRACING = true;
+const LANGSMITH_ENDPOINT = "https://api.smith.langchain.com";
+const LANGSMITH_API_KEY = process.env['LANGSMITH_API_KEY'];
+const LANGSMITH_PROJECT = "airoicalculator";
+const OPENAI_API_KEY = process.env['OPENAI_API_KEY'];
 
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
