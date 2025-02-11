@@ -193,10 +193,9 @@ export function registerRoutes(app: Express) {
     "recommendations": ["string"]
   }`;
 
-      // Updated API call using o1 format
       const response = await openai.chat.completions.create({
-        model: "o1-mini",
-        reasoning_effort: "low", // Changed from reasoning_effort="low"
+        model: "o1-mini",  // Keeping o1-mini as requested
+        reasoning_effort: "medium",  // Updated to proper object property syntax
         messages: [
           {
             role: "system",
