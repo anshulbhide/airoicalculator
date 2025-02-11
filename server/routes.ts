@@ -17,9 +17,9 @@ import OpenAI from "openai";
 
 LANGSMITH_TRACING=true
 LANGSMITH_ENDPOINT="https://api.smith.langchain.com"
-LANGSMITH_API_KEY="<your-api-key>"
+LANGSMITH_API_KEY= process.env['LANGSMITH_API_KEY']
 LANGSMITH_PROJECT="airoicalculator"
-OPENAI_API_KEY="<your-openai-api-key>"
+OPENAI_API_KEY=process.env['OPENAI_API_KEY]
 
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
