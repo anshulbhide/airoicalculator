@@ -121,13 +121,21 @@ export default function Results() {
             <RotateCcw className="mr-2 h-4 w-4" />
             Start Over
           </Button>
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             variant="outline"
             onClick={() => window.location.href = 'https://calendly.com/anshulbhide/30min'}
           >
             <span className="mr-2">🕐</span>
             Schedule a Workshop
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            onClick={() => window.location.href = '/assessment'}
+          >
+            <span className="mr-2">📋</span>
+            Take AI Readiness Assessment
           </Button>
         </div>
 
