@@ -93,10 +93,15 @@ const formSchema = z.object({
       acc[q.id] = z.string();
     });
     return acc;
-  }, {} as Record<string, z.ZodString>),
-  digitalTools: z.string(),
-  apiIntegration: z.string()
+  }, {} as Record<string, z.ZodString>)
 });
+
+type FormSchema = z.infer<typeof formSchema>;
+
+// Ensure all form fields are filled before allowing submission
+const isFormValid = (data: FormSchema) => {
+  return Object.values(data).every(value => value !== "");
+};
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -154,6 +159,14 @@ export default function Assessment() {
   const progress = ((currentSection + 1) / sections.length) * 100;
 
   const onSubmit = (data: FormValues) => {
+    if (!isFormValid(data)) {
+      toast({
+        title: "Please complete all sections",
+        description: "Make sure to fill out all questions before submitting.",
+        variant: "destructive",
+      });
+      return;
+    }
     analyzeMutation.mutate(data);
   };
 
