@@ -1,9 +1,7 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-const llm = new ChatOpenAI();
-await llm.invoke("Hello, world!");
+
 import { insertCalculatorSchema } from "@shared/schema";
 import PDFDocument from "pdfkit";
 import { 
