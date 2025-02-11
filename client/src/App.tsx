@@ -4,6 +4,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import Calculator from "@/pages/calculator";
 import Results from "@/pages/results";
+import Assessment from "@/pages/assessment";
 import NotFound from "@/pages/not-found";
 
 function Router() {
