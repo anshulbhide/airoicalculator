@@ -1,0 +1,75 @@
+You are tasked with building an interactive Gen AI Readiness Assessment tool for SMBs. The goal of this tool is to help businesses evaluate their readiness for adopting generative AI and provide personalized recommendations based on their responses. Use the OpenAI GPT-01 model to analyze input data and generate custom assessment reports. The tool must meet the following requirements:
+
+1. Define Core Readiness Dimensions:
+   - **Data Infrastructure & Quality:**
+     - Evaluate how well data is collected, stored, and made accessible.
+     - Include questions such as:
+       - "Do you have a centralized data repository?"
+       - "How clean and integrated is your customer data?"
+   
+   - **Business Process Automation:**
+     - Assess the extent of process digitization and automation.
+     - Include questions such as:
+       - "Which manual tasks would benefit from automation?"
+       - "Do you have standardized workflows?"
+   
+   - **Technology & IT Capabilities:**
+     - Gauge the current tech stack, cloud adoption, and overall digital maturity.
+     - Include questions such as:
+       - "What percentage of your processes are supported by digital tools?"
+       - "Do you leverage APIs and modern integrations?"
+   
+   - **Team Skillset & Culture:**
+     - Measure digital literacy, openness to change, and in-house expertise.
+     - Include questions such as:
+       - "Do you have a dedicated IT/data team?"
+       - "How comfortable is your team with new digital tools?"
+   
+   - **Use Case & Value Proposition Identification:**
+     - Identify areas where generative AI can have an immediate impact (e.g., personalized marketing, customer service, content generation).
+     - Include questions such as:
+       - "Are there repetitive tasks that could be automated?"
+       - "Have you identified opportunities for personalized customer engagement?"
+   
+   - **Budget & Investment Readiness:**
+     - Understand the business’s appetite for innovation, including available budget and strategic focus.
+     - Include questions such as:
+       - "Have you allocated budget for digital transformation initiatives?"
+       - "What percentage of revenue is reinvested into technology?"
+   
+   - **Compliance & Risk Management:**
+     - Consider any regulatory or security requirements that might impact AI adoption.
+     - Include questions such as:
+       - "Are you subject to strict data privacy regulations?"
+       - "Do you have protocols in place for data security?"
+
+2. Interactive Assessment Flow:
+   a. **Welcome & Context Setting:**
+      - Display a short introduction that explains the benefits of generative AI and why assessing readiness is important.
+      - Include a progress bar to show users where they are in the assessment.
+   
+   b. **Sectioned Questionnaire:**
+      - Organize the questions into sections based on the core readiness dimensions listed above.
+      - Use a mix of question types (multiple-choice, rating scales from 1–5, and yes/no questions) to gauge maturity.
+      - Provide tooltips or brief explanations for each question to help users understand the relevance of each dimension.
+   
+   c. **Scoring & Benchmarking:**
+      - Calculate a readiness score for each dimension as well as an overall composite score.
+      - Compare the scores against industry benchmarks or digital maturity scales (e.g., Not Ready, Partially Ready, Fully Ready).
+      - Display the results using visual cues such as gauges, heat maps, or scorecards.
+   
+   d. **Personalized Results & Recommendations:**
+      - Based on the calculated scores, generate a tailored report that outlines the business's strengths and areas for improvement.
+      - Provide actionable recommendations (e.g., “Invest in data consolidation”, “Upskill your team on AI tools”, “Explore process automation in customer service”).
+      - Optionally, include a “next steps” checklist or roadmap that the SMB can follow.
+
+3. User Experience & Lead Capture:
+   - **Seamless UI/UX:**
+     - Ensure the tool is mobile-responsive with a clean, intuitive design that guides users effortlessly through the assessment.
+   - **Embedded Lead Forms:**
+     - Integrate unobtrusive lead capture forms at key points (for example, before showing detailed results or when offering a personalized report download).
+   - **Social Sharing & Follow-Up:**
+     - Provide options for users to share their “readiness score” on social media to drive viral growth.
+     - Include an option for users to receive a detailed report via email.
+
+Implement this tool using Replit agent, ensuring that the design is intuitive, the assessment flow is smooth, and the output is a personalized, actionable Gen AI readiness report powered by GPT-01.

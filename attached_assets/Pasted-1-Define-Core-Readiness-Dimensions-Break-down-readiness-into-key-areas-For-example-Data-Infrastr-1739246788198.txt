@@ -1,0 +1,51 @@
+1. Define Core Readiness Dimensions
+Break down readiness into key areas. For example:
+
+Data Infrastructure & Quality:
+• Evaluate how well data is collected, stored, and made accessible.
+• Questions: “Do you have a centralized data repository?” or “How clean and integrated is your customer data?”
+
+Business Process Automation:
+• Assess the extent of process digitization and automation already in place.
+• Questions: “Which manual tasks would benefit from automation?” or “Do you have standardized workflows?”
+
+Technology & IT Capabilities:
+• Gauge the current tech stack, cloud adoption, and overall digital maturity.
+• Questions: “What percentage of your processes are supported by digital tools?” or “Do you leverage APIs and modern integrations?”
+
+Team Skillset & Culture:
+• Measure digital literacy, openness to change, and availability of in-house expertise.
+• Questions: “Do you have a dedicated IT/data team?” or “How comfortable is your team with new digital tools?”
+
+Use Case & Value Proposition Identification:
+• Identify where generative AI can have immediate impact (e.g., personalized marketing, customer service, content generation).
+• Questions: “Are there repetitive tasks that could be automated?” or “Have you identified opportunities for personalized customer engagement?”
+
+Budget & Investment Readiness:
+• Understand if there’s appetite for innovation in terms of budget and strategic focus.
+• Questions: “Have you allocated budget for digital transformation initiatives?” or “What percentage of revenue is reinvested into technology?”
+
+Compliance & Risk Management:
+• Consider any regulatory or security requirements that might impact AI adoption.
+• Questions: “Are you subject to strict data privacy regulations?” or “Do you have protocols in place for data security?”
+
+2. Interactive Assessment Flow
+a. Welcome & Context Setting:
+
+Begin with a short introduction that explains the benefits of Gen AI and why readiness matters.
+Include a progress bar to show users where they are in the assessment.
+b. Sectioned Questionnaire:
+
+Divide questions into the core dimensions outlined above.
+Use a mix of question types: multiple-choice, rating scales (1–5), and yes/no answers to gauge maturity.
+Include tooltips or brief explanations for each question so users understand why each dimension is critical.
+c. Scoring & Benchmarking:
+
+Calculate a readiness score for each dimension and an overall composite score.
+Compare the score against industry benchmarks or digital maturity scales (e.g., Not Ready, Partially Ready, Fully Ready).
+Use visual cues such as gauges, heat maps, or scorecards to make the results immediately digestible.
+d. Personalized Results & Recommendations:
+
+Based on the scores, generate a tailored report outlining strengths and opportunities.
+Offer actionable recommendations (e.g., “Invest in data consolidation”, “Upskill your team on AI tools”, or “Explore process automation in customer service”).
+Optionally, include a “next steps” checklist or roadmap that the SMB can follow.
