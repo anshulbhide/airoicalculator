@@ -1,6 +1,9 @@
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
+import { ChatOpenAI } from "langchain/chat_models/openai";
+const llm = new ChatOpenAI();
+await llm.invoke("Hello, world!");
 import { insertCalculatorSchema } from "@shared/schema";
 import PDFDocument from "pdfkit";
 import { 
@@ -14,7 +17,13 @@ import {
 } from "@shared/calculations";
 import OpenAI from "openai";
 
-// the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+LANGSMITH_TRACING=true
+LANGSMITH_ENDPOINT="https://api.smith.langchain.com"
+LANGSMITH_API_KEY="<your-api-key>"
+LANGSMITH_PROJECT="airoicalculator"
+OPENAI_API_KEY="<your-openai-api-key>"
+
+
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export function registerRoutes(app: Express) {
@@ -185,13 +194,13 @@ export function registerRoutes(app: Express) {
   Industry Context:
   The organization is in the ${responses.industry || 'unspecified'} industry.
 
-  Please analyze the responses where each answer is scored 1-4, with 4 being the highest. Consider the specific challenges and opportunities of their industry. Convert these scores to percentages where:
+  Please analyze the responses where each answer is scored 1-4, with 4 being the highest. Consider the specific challenges and opportunities of their industry. Mention common challenges faced in their industry. Convert these scores to percentages where:
   - Score of 1 = 25%
   - Score of 2 = 50%
   - Score of 3 = 75%
   - Score of 4 = 100%
 
-  Please provide the analysis in the following JSON format:
+  Please provide the analysis in the following JSON format below:
   {
     "overall_score": number (0-100),
     "readiness_level": "string (one of: 'Not Ready', 'Early Stage', 'Developing', 'Advanced', 'Fully Prepared')",
