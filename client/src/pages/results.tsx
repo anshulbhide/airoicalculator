@@ -8,9 +8,7 @@ import type { Calculator, Results } from "@shared/schema";
 
 export default function Results() {
   const { id } = useParams();
-  const scrollToCalendly = () => {
-    document.getElementById('calendly-widget')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  
 
   const { data: calculator } = useQuery<Calculator>({
     queryKey: [`/api/calculator/${id}`],
@@ -126,16 +124,11 @@ export default function Results() {
           <Button 
             size="lg" 
             variant="outline"
-            onClick={scrollToCalendly}
+            onClick={() => window.location.href = 'mailto:anshulbhide@gmail.com'}
           >
             <Mail className="mr-2 h-4 w-4" />
-            Schedule a Demo
+            Contact Us
           </Button>
-        </div>
-
-        <div id="calendly-widget" className="pt-8">
-          <div className="calendly-inline-widget" data-url="https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1" style={{ minWidth: "320px", height: "700px" }}></div>
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
         </div>
       </div>
     </div>
