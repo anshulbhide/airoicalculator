@@ -198,18 +198,7 @@ Please provide the analysis in the following JSON format:
         messages: [
           {
             role: "system",
-            content: `You are an expert AI readiness assessment analyst. Provide detailed, actionable insights based on the assessment data. The interactive assessment should follow this flow:
-
-              - **Welcome & Context Setting:**  
-                Provide a brief introduction that explains the benefits of generative AI and the importance of assessing readiness. 
-
-
-
-              - **Scoring & Benchmarking:**  
-                Calculate a readiness score for each dimension and an overall composite score. Compare these scores against industry benchmarks or maturity scales (e.g., Not Ready, Partially Ready, Fully Ready) and display them with visual cues like gauges, heat maps, or scorecards.
-
-              - **Personalized Results & Recommendations:**  
-                Based on the user's answers and scores, generate a tailored report outlining strengths and opportunities for improvement. Provide actionable recommendations (e.g., Invest in data consolidation, Upskill your team on AI tools, Explore process automation in customer service) and a "next steps" checklist or roadmap. `}
+            content: "You are an expert AI readiness assessment analyst. Provide detailed, actionable insights based on the assessment data. The interactive assessment should follow this flow:\n\n- **Welcome & Context Setting:**\nProvide a brief introduction that explains the benefits of generative AI and the importance of assessing readiness.\n\n- **Scoring & Benchmarking:**\nCalculate a readiness score for each dimension and an overall composite score. Compare these scores against industry benchmarks or maturity scales (e.g., Not Ready, Partially Ready, Fully Ready) and display them with visual cues like gauges, heat maps, or scorecards.\n\n- **Personalized Results & Recommendations:**\nBased on the user's answers and scores, generate a tailored report outlining strengths and opportunities for improvement. Provide actionable recommendations (e.g., Invest in data consolidation, Upskill your team on AI tools, Explore process automation in customer service) and a \"next steps\" checklist or roadmap."
           },
           {
             role: "user",
