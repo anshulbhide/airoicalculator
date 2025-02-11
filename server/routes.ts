@@ -173,28 +173,30 @@ export function registerRoutes(app: Express) {
     try {
       const { responses } = req.body;
 
-      // Prepare the assessment data for OpenAI analysis
+      // Prepare the assessment data for analysis
       const prompt = `As an AI readiness assessment expert, analyze the following assessment responses and provide a detailed evaluation of the organization's AI readiness. Score their readiness on a scale of 1-10 and provide specific recommendations for improvement.
 
-Assessment Responses:
-${JSON.stringify(responses, null, 2)}
+  Assessment Responses:
+  ${JSON.stringify(responses, null, 2)}
 
-Please provide the analysis in the following JSON format:
-{
-  "overall_score": number (1-10),
-  "readiness_level": "string (one of: 'Not Ready', 'Early Stage', 'Developing', 'Advanced', 'Fully Prepared')",
-  "dimension_scores": {
-    "data_infrastructure": number (1-10),
-    "process_automation": number (1-10),
-    "tech_capabilities": number (1-10)
-  },
-  "key_strengths": ["string"],
-  "improvement_areas": ["string"],
-  "recommendations": ["string"]
-}`;
+  Please provide the analysis in the following JSON format:
+  {
+    "overall_score": number (1-10),
+    "readiness_level": "string (one of: 'Not Ready', 'Early Stage', 'Developing', 'Advanced', 'Fully Prepared')",
+    "dimension_scores": {
+      "data_infrastructure": number (1-10),
+      "process_automation": number (1-10),
+      "tech_capabilities": number (1-10)
+    },
+    "key_strengths": ["string"],
+    "improvement_areas": ["string"],
+    "recommendations": ["string"]
+  }`;
 
+      // Updated API call using o1 format
       const response = await openai.chat.completions.create({
         model: "o1-mini",
+        reasoning_effort: "low", // Changed from reasoning_effort="low"
         messages: [
           {
             role: "system",
@@ -210,7 +212,6 @@ Please provide the analysis in the following JSON format:
 
       const analysis = JSON.parse(response.choices[0].message.content);
       res.json(analysis);
-
     } catch (error) {
       console.error("Error analyzing assessment:", error);
       res.status(500).json({ error: "Failed to analyze assessment" });
