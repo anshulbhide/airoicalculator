@@ -14,6 +14,8 @@ import {
   getImprovementPercentage
 } from "@shared/calculations";
 import OpenAI from "openai";
+import { ChatOpenAI } from "langchain/chat_models/openai";
+
 
 const LANGSMITH_TRACING = true;
 const LANGSMITH_ENDPOINT = "https://api.smith.langchain.com";
@@ -21,8 +23,8 @@ const LANGSMITH_API_KEY = process.env['LANGSMITH_API_KEY'];
 const LANGSMITH_PROJECT = "airoicalculator";
 const OPENAI_API_KEY = process.env['OPENAI_API_KEY'];
 
-
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const llm = new ChatOpenAI();
+// const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export function registerRoutes(app: Express) {
   app.post("/api/calculator", async (req, res) => {
