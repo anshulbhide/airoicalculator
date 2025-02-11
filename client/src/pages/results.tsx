@@ -1,4 +1,4 @@
-import { useParams } from "wouter";
+import { useParams, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,9 @@ import type { Calculator, Results } from "@shared/schema";
 
 export default function Results() {
   const { id } = useParams();
-
+  const scrollToCalendly = () => {
+    document.getElementById('calendly-widget')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const { data: calculator } = useQuery<Calculator>({
     queryKey: [`/api/calculator/${id}`],
@@ -113,33 +115,29 @@ export default function Results() {
             <Download className="mr-2 h-4 w-4" />
             Download Full Report
           </Button>
-          <Button 
-            size="lg" 
-            variant="outline"
-            onClick={() => window.location.href = '/'}
-          >
-            <RotateCcw className="mr-2 h-4 w-4" />
-            Start Over
-          </Button>
+          <Link href="/">
+            <Button size="lg" variant="outline">
+              <RotateCcw className="mr-2 h-4 w-4" />
+              Start Over
+            </Button>
+          </Link>
           <Button
             size="lg"
             variant="outline"
-            onClick={() => window.location.href = 'https://calendly.com/anshulbhide/30min'}
+            onClick={scrollToCalendly}
           >
             <span className="mr-2">🕐</span>
             Schedule a Workshop
           </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            onClick={() => window.location.href = '/assessment'}
-          >
-            <span className="mr-2">📋</span>
-            Take AI Readiness Assessment
-          </Button>
+          <Link href="/assessment">
+            <Button size="lg" variant="outline">
+              <span className="mr-2">📋</span>
+              Take AI Readiness Assessment
+            </Button>
+          </Link>
         </div>
 
-        <div className="mt-12">
+        <div id="calendly-widget" className="mt-12">
           <div className="calendly-inline-widget" data-url="https://calendly.com/anshulbhide/30min?hide_event_type_details=1&hide_gdpr_banner=1" style={{minWidth: 320, height: 700}}></div>
         </div>
       </div>
