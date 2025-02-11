@@ -14,6 +14,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Progress } from "@/components/ui/progress";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 const questions = {
   dataInfrastructure: [
@@ -95,10 +98,46 @@ const formSchema = z.object(
 
 type FormValues = z.infer<typeof formSchema>;
 
+type AnalysisResult = {
+  overall_score: number;
+  readiness_level: string;
+  dimension_scores: {
+    data_infrastructure: number;
+    process_automation: number;
+    tech_capabilities: number;
+  };
+  key_strengths: string[];
+  improvement_areas: string[];
+  recommendations: string[];
+};
+
 const sections = Object.keys(questions);
 
 export default function Assessment() {
   const [currentSection, setCurrentSection] = useState(0);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const { toast } = useToast();
+
+  const analyzeMutation = useMutation({
+    mutationFn: async (data: FormValues) => {
+      const response = await apiRequest("POST", "/api/assessment/analyze", { responses: data });
+      return response.json();
+    },
+    onSuccess: (data) => {
+      setAnalysisResult(data);
+      toast({
+        title: "Assessment Complete",
+        description: "Your AI readiness analysis is ready!",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: "Failed to analyze assessment. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -113,8 +152,7 @@ export default function Assessment() {
   const progress = ((currentSection + 1) / sections.length) * 100;
 
   const onSubmit = (data: FormValues) => {
-    // Calculate scores and generate recommendations
-    console.log(data);
+    analyzeMutation.mutate(data);
   };
 
   const currentQuestions = questions[sections[currentSection] as keyof typeof questions];
@@ -129,81 +167,145 @@ export default function Assessment() {
           </p>
         </div>
 
-        <Card className="p-6">
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <h2 className="text-2xl font-semibold capitalize">
-                {sections[currentSection].replace(/([A-Z])/g, ' $1').trim()}
-              </h2>
-              <Progress value={progress} className="h-2" />
-              <p className="text-sm text-muted-foreground">
-                Section {currentSection + 1} of {sections.length}
-              </p>
-            </div>
+        {!analysisResult ? (
+          <Card className="p-6">
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <h2 className="text-2xl font-semibold capitalize">
+                  {sections[currentSection].replace(/([A-Z])/g, " $1").trim()}
+                </h2>
+                <Progress value={progress} className="h-2" />
+                <p className="text-sm text-muted-foreground">
+                  Section {currentSection + 1} of {sections.length}
+                </p>
+              </div>
 
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                {currentQuestions.map((q) => (
-                  <FormField
-                    key={q.id}
-                    control={form.control}
-                    name={q.id}
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
-                        <FormLabel>{q.question}</FormLabel>
-                        <FormControl>
-                          <RadioGroup
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                            className="space-y-2"
-                          >
-                            {q.options.map((option) => (
-                              <FormItem
-                                key={option.value}
-                                className="flex items-center space-x-3 space-y-0"
-                              >
-                                <FormControl>
-                                  <RadioGroupItem value={option.value} />
-                                </FormControl>
-                                <FormLabel className="font-normal">
-                                  {option.label}
-                                </FormLabel>
-                              </FormItem>
-                            ))}
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                ))}
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  {currentQuestions.map((q) => (
+                    <FormField
+                      key={q.id}
+                      control={form.control}
+                      name={q.id}
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <FormLabel>{q.question}</FormLabel>
+                          <FormControl>
+                            <RadioGroup
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              className="space-y-2"
+                            >
+                              {q.options.map((option) => (
+                                <FormItem
+                                  key={option.value}
+                                  className="flex items-center space-x-3 space-y-0"
+                                >
+                                  <FormControl>
+                                    <RadioGroupItem value={option.value} />
+                                  </FormControl>
+                                  <FormLabel className="font-normal">
+                                    {option.label}
+                                  </FormLabel>
+                                </FormItem>
+                              ))}
+                            </RadioGroup>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  ))}
 
-                <div className="flex justify-between pt-4">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setCurrentSection(current => Math.max(0, current - 1))}
-                    disabled={currentSection === 0}
-                  >
-                    Previous
-                  </Button>
-                  {currentSection < sections.length - 1 ? (
+                  <div className="flex justify-between pt-4">
                     <Button
                       type="button"
-                      onClick={() => setCurrentSection(current => Math.min(sections.length - 1, current + 1))}
+                      variant="outline"
+                      onClick={() => setCurrentSection((current) => Math.max(0, current - 1))}
+                      disabled={currentSection === 0}
                     >
-                      Next
+                      Previous
                     </Button>
-                  ) : (
-                    <Button type="submit">
-                      Submit Assessment
-                    </Button>
-                  )}
+                    {currentSection < sections.length - 1 ? (
+                      <Button
+                        type="button"
+                        onClick={() => setCurrentSection((current) => Math.min(sections.length - 1, current + 1))}
+                      >
+                        Next
+                      </Button>
+                    ) : (
+                      <Button type="submit" disabled={analyzeMutation.isPending}>
+                        {analyzeMutation.isPending ? "Analyzing..." : "Submit Assessment"}
+                      </Button>
+                    )}
+                  </div>
+                </form>
+              </Form>
+            </div>
+          </Card>
+        ) : (
+          <Card className="p-6">
+            <div className="space-y-8">
+              <div className="text-center">
+                <h2 className="text-3xl font-bold mb-2">Your AI Readiness Score: {analysisResult.overall_score}/10</h2>
+                <p className="text-xl text-primary">{analysisResult.readiness_level}</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <h3 className="font-semibold">Data Infrastructure</h3>
+                  <div className="text-2xl text-primary">{analysisResult.dimension_scores.data_infrastructure}/10</div>
                 </div>
-              </form>
-            </Form>
-          </div>
-        </Card>
+                <div className="space-y-2">
+                  <h3 className="font-semibold">Process Automation</h3>
+                  <div className="text-2xl text-primary">{analysisResult.dimension_scores.process_automation}/10</div>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-semibold">Tech Capabilities</h3>
+                  <div className="text-2xl text-primary">{analysisResult.dimension_scores.tech_capabilities}/10</div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Key Strengths</h3>
+                  <ul className="list-disc pl-5 space-y-1">
+                    {analysisResult.key_strengths.map((strength, index) => (
+                      <li key={index}>{strength}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Areas for Improvement</h3>
+                  <ul className="list-disc pl-5 space-y-1">
+                    {analysisResult.improvement_areas.map((area, index) => (
+                      <li key={index}>{area}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Recommendations</h3>
+                  <ul className="list-disc pl-5 space-y-1">
+                    {analysisResult.recommendations.map((rec, index) => (
+                      <li key={index}>{rec}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex justify-center gap-4">
+                <Button size="lg" onClick={() => setAnalysisResult(null)}>
+                  Retake Assessment
+                </Button>
+                <Button size="lg" variant="outline" onClick={() => (window.location.href = "/")}>
+                  Return to Calculator
+                </Button>
+              </div>
+            </div>
+          </Card>
+        )}
       </div>
     </div>
   );
