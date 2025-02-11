@@ -19,7 +19,7 @@ LANGSMITH_TRACING=true
 LANGSMITH_ENDPOINT="https://api.smith.langchain.com"
 LANGSMITH_API_KEY= process.env['LANGSMITH_API_KEY']
 LANGSMITH_PROJECT="airoicalculator"
-OPENAI_API_KEY=process.env['OPENAI_API_KEY]
+OPENAI_API_KEY=process.env['OPENAI_API_KEY']
 
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
