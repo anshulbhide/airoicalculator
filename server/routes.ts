@@ -173,11 +173,14 @@ export function registerRoutes(app: Express) {
     try {
       const { responses } = req.body;
 
+      // Ensure responses is not null and stringify with a default empty object if needed
+      const responsesJson = JSON.stringify(responses ?? {}, null, 2);
+
       // Prepare the assessment data for analysis
       const prompt = `As an AI readiness assessment expert, analyze the following assessment responses and provide a detailed evaluation of the organization's AI readiness. Score their readiness on a scale of 1-10 and provide specific recommendations for improvement.
 
   Assessment Responses:
-  ${JSON.stringify(responses, null, 2)}
+  ${responsesJson}
 
   Please provide the analysis in the following JSON format:
   {
@@ -194,16 +197,16 @@ export function registerRoutes(app: Express) {
   }`;
 
       const response = await openai.chat.completions.create({
-        model: "o1-mini",  // Keeping o1-mini as requested
-        reasoning_effort: "medium",  // Updated to proper object property syntax
+        model: "o3-mini",
+        reasoning_effort: "medium",
         messages: [
           {
-            role: "system",
+            role: "user",
             content: "You are an expert AI readiness assessment analyst. Provide detailed, actionable insights based on the assessment data. The interactive assessment should follow this flow:\n\n- **Welcome & Context Setting:**\nProvide a brief introduction that explains the benefits of generative AI and the importance of assessing readiness.\n\n- **Scoring & Benchmarking:**\nCalculate a readiness score for each dimension and an overall composite score. Compare these scores against industry benchmarks or maturity scales (e.g., Not Ready, Partially Ready, Fully Ready) and display them with visual cues like gauges, heat maps, or scorecards.\n\n- **Personalized Results & Recommendations:**\nBased on the user's answers and scores, generate a tailored report outlining strengths and opportunities for improvement. Provide actionable recommendations (e.g., Invest in data consolidation, Upskill your team on AI tools, Explore process automation in customer service) and a \"next steps\" checklist or roadmap."
           },
           {
             role: "user",
-            content: prompt
+            content: prompt as string  // Type assertion to ensure string type
           }
         ],
         response_format: { type: "json_object" }
