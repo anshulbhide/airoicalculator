@@ -262,22 +262,22 @@ export default function Assessment() {
           <Card className="p-6">
             <div className="space-y-8">
               <div className="text-center">
-                <h2 className="text-3xl font-bold mb-2">Your AI Readiness Score: {analysisResult.overall_score}/10</h2>
+                <h2 className="text-3xl font-bold mb-2">Your AI Readiness Score: {analysisResult.overall_score}%</h2>
                 <p className="text-xl text-primary">{analysisResult.readiness_level}</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
                   <h3 className="font-semibold">Data Infrastructure</h3>
-                  <div className="text-2xl text-primary">{analysisResult.dimension_scores.data_infrastructure}/10</div>
+                  <div className="text-2xl text-primary">{analysisResult.dimension_scores.data_infrastructure}%</div>
                 </div>
                 <div className="space-y-2">
                   <h3 className="font-semibold">Process Automation</h3>
-                  <div className="text-2xl text-primary">{analysisResult.dimension_scores.process_automation}/10</div>
+                  <div className="text-2xl text-primary">{analysisResult.dimension_scores.process_automation}%</div>
                 </div>
                 <div className="space-y-2">
                   <h3 className="font-semibold">Tech Capabilities</h3>
-                  <div className="text-2xl text-primary">{analysisResult.dimension_scores.tech_capabilities}/10</div>
+                  <div className="text-2xl text-primary">{analysisResult.dimension_scores.tech_capabilities}%</div>
                 </div>
               </div>
 
