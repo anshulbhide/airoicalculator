@@ -3,6 +3,7 @@ dotenv.config();
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
+import { questions } from "../shared/questions";
 import { Client } from "langsmith";
 import { getEnvironmentVariables } from "langsmith/utils";
 // Initialize LangSmith client
