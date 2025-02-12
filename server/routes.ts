@@ -190,7 +190,15 @@ export function registerRoutes(app: Express) {
 
   app.post("/api/assessment/analyze", async (req, res) => {
     try {
-      const { responses } = req.body;
+      const { responses, calculatorId } = req.body;
+      let industryContext = responses.industry || 'unspecified';
+      
+      if (calculatorId) {
+        const calculator = await storage.getCalculatorById(calculatorId);
+        if (calculator) {
+          industryContext = calculator.industry;
+        }
+      }
 
       // Ensure responses is not null and stringify with a default empty object if needed
       const responsesJson = JSON.stringify(responses ?? {}, null, 2);
@@ -202,7 +210,7 @@ export function registerRoutes(app: Express) {
   ${responsesJson}
 
   Industry Context:
-  The organization is in the ${responses.industry || 'unspecified'} industry.
+  The organization is in the ${industryContext} industry.
 
   Please analyze the responses where each answer is scored 1-4, with 4 being the highest. Consider the specific challenges and opportunities of their industry. Mention common challenges faced in their industry. Convert these scores to percentages where:
   - Score of 1 = 25%

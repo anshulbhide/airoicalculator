@@ -129,7 +129,7 @@ export default function Results() {
             <span className="mr-2">🕐</span>
             Schedule a Workshop
           </Button>
-          <Link href="/assessment">
+          <Link href={`/assessment?calculatorId=${id}`}>
             <Button size="lg" variant="outline">
               <span className="mr-2">📋</span>
               Take AI Readiness Assessment

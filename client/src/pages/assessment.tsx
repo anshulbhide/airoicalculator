@@ -127,7 +127,9 @@ export default function Assessment() {
 
   const analyzeMutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const response = await apiRequest("POST", "/api/assessment/analyze", { responses: data });
+      const searchParams = new URLSearchParams(window.location.search);
+      const calculatorId = searchParams.get('calculatorId');
+      const response = await apiRequest("POST", "/api/assessment/analyze", { responses: data, calculatorId: calculatorId ? parseInt(calculatorId) : undefined });
       return response.json();
     },
     onSuccess: (data) => {
