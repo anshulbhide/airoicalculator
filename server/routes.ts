@@ -202,7 +202,7 @@ export function registerRoutes(app: Express) {
   ${responsesJson}
 
   Industry Context:
-  The organization is in the ${responses.industry || 'unspecified'} industry.
+  The organization is in the ${calculator.industry || responses.industry || 'unspecified'} industry.
 
   Please analyze the responses where each answer is scored 1-4, with 4 being the highest. Consider the specific challenges and opportunities of their industry. Mention common challenges faced in their industry. Convert these scores to percentages where:
   - Score of 1 = 25%
