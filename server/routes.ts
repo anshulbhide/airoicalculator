@@ -1,6 +1,12 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
+import { Client } from "langsmith";
+import { getEnvironmentVariables } from "langsmith/utils";
+// Initialize LangSmith client
+const client = new Client();
 
 import { insertCalculatorSchema } from "@shared/schema";
 import PDFDocument from "pdfkit";
@@ -13,9 +19,9 @@ import {
   calculatePaybackPeriod,
   getImprovementPercentage
 } from "@shared/calculations";
-import OpenAI from "openai";
-import { ChatOpenAI } from "@langchain/openai";
-
+import { OpenAI } from "openai";
+import { traceable } from "langsmith/traceable";
+import { wrapOpenAI } from "langsmith/wrappers";
 
 const LANGSMITH_TRACING = true;
 const LANGSMITH_ENDPOINT = "https://api.smith.langchain.com";
@@ -23,7 +29,11 @@ const LANGSMITH_API_KEY = process.env['LANGSMITH_API_KEY'];
 const LANGSMITH_PROJECT = "airoicalculator";
 const OPENAI_API_KEY = process.env['OPENAI_API_KEY'];
 
-const llm = new ChatOpenAI();
+// part of langchain trace
+const OpenAIClient = wrapOpenAI(new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+}));
+
 // const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export function registerRoutes(app: Express) {
@@ -214,7 +224,7 @@ export function registerRoutes(app: Express) {
     "recommendations": ["string"]
   }`;
 
-      const response = await openai.chat.completions.create({
+      const response = await OpenAIClient.chat.completions.create({
         model: "o3-mini",
         reasoning_effort: "medium",
         messages: [
