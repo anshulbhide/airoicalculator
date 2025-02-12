@@ -3,7 +3,6 @@ dotenv.config();
 import type { Express } from "express";
 import { createServer } from "http";
 import { storage } from "./storage";
-import { questions } from "../shared/questions";
 import { Client } from "langsmith";
 import { getEnvironmentVariables } from "langsmith/utils";
 // Initialize LangSmith client
@@ -194,25 +193,13 @@ export function registerRoutes(app: Express) {
       const { responses } = req.body;
 
       // Ensure responses is not null and stringify with a default empty object if needed
-      // Convert responses to detailed format with questions
-      const detailedResponses = Object.entries(responses ?? {}).map(([id, score]) => {
-        const [section, questionNumber] = id.split('_');
-        const question = questions[section]?.[parseInt(questionNumber) - 1];
-        return {
-          section,
-          question: question?.text,
-          score: parseInt(score),
-          answer: question?.options?.[parseInt(score) - 1]
-        };
-      });
-
-      const detailedResponsesJson = JSON.stringify(detailedResponses, null, 2);
+      const responsesJson = JSON.stringify(responses ?? {}, null, 2);
 
       // Prepare the assessment data for analysis
       const prompt = `As an AI readiness assessment expert, analyze the following assessment responses and provide a detailed evaluation of the organization's AI readiness. Score their readiness on a scale of 1-10 and provide specific recommendations for improvement.
 
-  Detailed Assessment Responses:
-  ${detailedResponsesJson}
+  Assessment Responses:
+  ${responsesJson}
 
   Industry Context:
   The organization is in the ${calculator.industry || responses.industry || 'unspecified'} industry.

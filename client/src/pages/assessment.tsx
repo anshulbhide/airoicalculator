@@ -18,9 +18,8 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
-import { questions } from "../../../shared/questions";
-
-const sections = Object.keys(questions);
+const questions = {
+  dataInfrastructure: [
     {
       id: "centralizedData",
       question: "Do you have a centralized data repository?",
