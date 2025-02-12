@@ -129,7 +129,19 @@ export default function Assessment() {
     mutationFn: async (data: FormValues) => {
       const searchParams = new URLSearchParams(window.location.search);
       const calculatorId = searchParams.get('calculatorId');
-      const response = await apiRequest("POST", "/api/assessment/analyze", { responses: data, calculatorId: calculatorId ? parseInt(calculatorId) : undefined });
+      
+      // Map the numeric values to their text labels
+      const mappedResponses = Object.entries(data).reduce((acc, [key, value]) => {
+        const question = Object.values(questions).flat().find(q => q.id === key);
+        const selectedOption = question?.options.find(opt => opt.value === value);
+        acc[key] = selectedOption?.label || value;
+        return acc;
+      }, {} as Record<string, string>);
+
+      const response = await apiRequest("POST", "/api/assessment/analyze", { 
+        responses: mappedResponses, 
+        calculatorId: calculatorId ? parseInt(calculatorId) : undefined 
+      });
       return response.json();
     },
     onSuccess: (data) => {
