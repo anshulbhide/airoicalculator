@@ -291,6 +291,26 @@ export default function Assessment() {
                       </Button>
                     )}
                   </div>
+                  
+                  <div className="space-y-4 mt-8">
+                    <h3 className="text-lg font-semibold">Additional Information</h3>
+                    <FormField
+                      control={form.control}
+                      name="useCaseVision"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>What specific workflows or processes do you envision automating with LLMs?</FormLabel>
+                          <FormControl>
+                            <textarea
+                              {...field}
+                              className="flex min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                              placeholder="Describe your automation goals and use cases..."
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </form>
               </Form>
             </div>
@@ -345,26 +365,6 @@ export default function Assessment() {
                     ))}
                   </ul>
                 </div>
-              </div>
-
-              <div className="space-y-4 mt-8">
-                <h3 className="text-lg font-semibold">Additional Information</h3>
-                <FormField
-                  control={form.control}
-                  name="useCaseVision"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>What specific workflows or processes do you envision automating with LLMs?</FormLabel>
-                      <FormControl>
-                        <textarea
-                          {...field}
-                          className="flex min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                          placeholder="Describe your automation goals and use cases..."
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
               </div>
 
               <div className="flex justify-center gap-4">
