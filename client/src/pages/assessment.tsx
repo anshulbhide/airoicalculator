@@ -40,17 +40,7 @@ const questions = {
         { value: "4", label: "Multiple successful LLM implementations driving measurable value" },
       ],
     },
-    {
-      id: "useCaseVision",
-      question: "What specific workflows or processes do you envision automating with LLMs?",
-      options: [
-        { value: "1", label: "No specific vision yet" },
-        { value: "2", label: "Basic automation ideas identified" },
-        { value: "3", label: "Clear vision with defined use cases" },
-        { value: "4", label: "Comprehensive automation strategy" },
-      ],
-    },
-  ],
+    ],
   dataInfrastructure: [
     {
       id: "centralizedData",
@@ -125,7 +115,8 @@ const formSchema = z.object({
       acc[q.id] = z.string();
     });
     return acc;
-  }, {} as Record<string, z.ZodString>)
+  }, {} as Record<string, z.ZodString>),
+  useCaseVision: z.string().optional()
 });
 
 type FormSchema = z.infer<typeof formSchema>;
@@ -354,6 +345,26 @@ export default function Assessment() {
                     ))}
                   </ul>
                 </div>
+              </div>
+
+              <div className="space-y-4 mt-8">
+                <h3 className="text-lg font-semibold">Additional Information</h3>
+                <FormField
+                  control={form.control}
+                  name="useCaseVision"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>What specific workflows or processes do you envision automating with LLMs?</FormLabel>
+                      <FormControl>
+                        <textarea
+                          {...field}
+                          className="flex min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                          placeholder="Describe your automation goals and use cases..."
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
               </div>
 
               <div className="flex justify-center gap-4">
