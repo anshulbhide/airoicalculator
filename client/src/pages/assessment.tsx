@@ -42,7 +42,7 @@ const questions = {
     },
     {
       id: "useCaseVision",
-      question: "What specific workflows or processes do you envision automating with LLMs? (Optional)",
+      question: "What specific workflows or processes do you envision automating with LLMs?",
       options: [
         { value: "1", label: "No specific vision yet" },
         { value: "2", label: "Basic automation ideas identified" },
