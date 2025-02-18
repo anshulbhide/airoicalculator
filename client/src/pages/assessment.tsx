@@ -19,6 +19,38 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
 const questions = {
+  organizationalReadiness: [
+    {
+      id: "leadershipAlignment",
+      question: "How aligned is your leadership and organizational culture towards embracing AI?",
+      options: [
+        { value: "1", label: "Leadership is skeptical and reluctant to adopt AI" },
+        { value: "2", label: "Some leaders are open, but overall culture is risk-averse" },
+        { value: "3", label: "Leadership is supportive, though some internal resistance exists" },
+        { value: "4", label: "Strong leadership commitment with a proactive, innovation-driven culture" },
+      ],
+    },
+    {
+      id: "llmExperimentation",
+      question: "What is your level of experimentation with LLM use cases?",
+      options: [
+        { value: "1", label: "Haven't explored LLM use cases" },
+        { value: "2", label: "Initial exploration phase; piloting a few ideas" },
+        { value: "3", label: "Active experimentation with pilot projects underway" },
+        { value: "4", label: "Multiple successful LLM implementations driving measurable value" },
+      ],
+    },
+    {
+      id: "useCaseVision",
+      question: "What specific workflows or processes do you envision automating with LLMs? (Optional)",
+      options: [
+        { value: "1", label: "No specific vision yet" },
+        { value: "2", label: "Basic automation ideas identified" },
+        { value: "3", label: "Clear vision with defined use cases" },
+        { value: "4", label: "Comprehensive automation strategy" },
+      ],
+    },
+  ],
   dataInfrastructure: [
     {
       id: "centralizedData",
