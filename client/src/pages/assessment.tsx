@@ -123,7 +123,10 @@ type FormSchema = z.infer<typeof formSchema>;
 
 // Ensure all form fields are filled before allowing submission
 const isFormValid = (data: FormSchema) => {
-  return Object.values(data).every(value => value !== "");
+  const requiredFields = Object.entries(questions).flatMap(([_, sectionQuestions]) => 
+    sectionQuestions.map(q => q.id)
+  );
+  return requiredFields.every(field => data[field as keyof FormSchema] !== "");
 };
 
 type FormValues = z.infer<typeof formSchema>;
