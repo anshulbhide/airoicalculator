@@ -188,6 +188,8 @@ export default function Assessment() {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    mode: "onSubmit",
+    reValidateMode: "onSubmit",
     defaultValues: Object.entries(questions).reduce((acc, [section, sectionQuestions]) => {
       sectionQuestions.forEach((q) => {
         acc[q.id] = "";
