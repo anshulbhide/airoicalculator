@@ -199,15 +199,28 @@ export default function Assessment() {
   const progress = ((currentSection + 1) / sections.length) * 100;
 
   const onSubmit = (data: FormValues) => {
-    if (!isFormValid(data)) {
+    const currentSectionQuestions = questions[sections[currentSection] as keyof typeof questions];
+    const currentSectionFields = currentSectionQuestions.map(q => q.id);
+    const isCurrentSectionValid = currentSectionFields.every(field => data[field as keyof FormValues] !== "");
+    
+    if (currentSection === sections.length - 1) {
+      if (!isFormValid(data)) {
+        toast({
+          title: "Please complete all sections",
+          description: "Make sure to fill out all questions before submitting.",
+          variant: "destructive",
+        });
+        return;
+      }
+      analyzeMutation.mutate(data);
+    } else if (!isCurrentSectionValid) {
       toast({
-        title: "Please complete all sections",
-        description: "Make sure to fill out all questions before submitting.",
+        title: "Please complete current section",
+        description: "Make sure to answer all questions in this section.",
         variant: "destructive",
       });
       return;
     }
-    analyzeMutation.mutate(data);
   };
 
   const currentQuestions = questions[sections[currentSection] as keyof typeof questions];
