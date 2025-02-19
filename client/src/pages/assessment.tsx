@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -17,6 +17,8 @@ import { Progress } from "@/components/ui/progress";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { Download, RotateCcw, Calendar, Calculator } from 'lucide-react'; // Assuming these icons are from lucide-react
+import React from 'react';
 
 const questions = {
   organizationalReadiness: [
@@ -40,7 +42,7 @@ const questions = {
         { value: "4", label: "Multiple successful LLM implementations driving measurable value" },
       ],
     },
-    ],
+  ],
   dataInfrastructure: [
     {
       id: "centralizedData",
@@ -116,18 +118,8 @@ const formSchema = z.object({
     });
     return acc;
   }, {} as Record<string, z.ZodString>),
-  useCaseVision: z.string().optional()
+  useCaseVision: z.string().optional(),
 });
-
-type FormSchema = z.infer<typeof formSchema>;
-
-// Ensure all form fields are filled before allowing submission
-const isFormValid = (data: FormSchema) => {
-  const requiredFields = Object.entries(questions).flatMap(([_, sectionQuestions]) => 
-    sectionQuestions.map(q => q.id)
-  );
-  return requiredFields.every(field => data[field as keyof FormSchema] !== "");
-};
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -149,24 +141,28 @@ const sections = Object.keys(questions);
 export default function Assessment() {
   const [currentSection, setCurrentSection] = useState(0);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [calculatorId, setCalculatorId] = useState<string | null>(null);
   const { toast } = useToast();
+
+  // Get calculatorId from URL when component mounts
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const id = searchParams.get("calculatorId");
+    setCalculatorId(id);
+  }, []);
 
   const analyzeMutation = useMutation({
     mutationFn: async (data: FormValues) => {
-      const searchParams = new URLSearchParams(window.location.search);
-      const calculatorId = searchParams.get('calculatorId');
-      
-      // Map the numeric values to their text labels
       const mappedResponses = Object.entries(data).reduce((acc, [key, value]) => {
-        const question = Object.values(questions).flat().find(q => q.id === key);
-        const selectedOption = question?.options.find(opt => opt.value === value);
+        const question = Object.values(questions).flat().find((q) => q.id === key);
+        const selectedOption = question?.options.find((opt) => opt.value === value);
         acc[key] = selectedOption?.label || value;
         return acc;
       }, {} as Record<string, string>);
 
-      const response = await apiRequest("POST", "/api/assessment/analyze", { 
-        responses: mappedResponses, 
-        calculatorId: calculatorId ? parseInt(calculatorId) : undefined 
+      const response = await apiRequest("POST", "/api/assessment/analyze", {
+        responses: mappedResponses,
+        calculatorId: calculatorId ? parseInt(calculatorId) : undefined,
       });
       return response.json();
     },
@@ -189,13 +185,15 @@ export default function Assessment() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     mode: "onSubmit",
-    reValidateMode: "onSubmit",
-    defaultValues: Object.entries(questions).reduce((acc, [section, sectionQuestions]) => {
-      sectionQuestions.forEach((q) => {
-        acc[q.id] = "";
-      });
-      return acc;
-    }, {} as Record<string, string>),
+    defaultValues: {
+      ...Object.entries(questions).reduce((acc, [section, sectionQuestions]) => {
+        sectionQuestions.forEach((q) => {
+          acc[q.id] = "";
+        });
+        return acc;
+      }, {} as Record<string, string>),
+      useCaseVision: "",
+    },
   });
 
   const progress = ((currentSection + 1) / sections.length) * 100;
@@ -204,9 +202,9 @@ export default function Assessment() {
     if (!form.formState.isSubmitted) return;
 
     const currentSectionQuestions = questions[sections[currentSection] as keyof typeof questions];
-    const currentSectionFields = currentSectionQuestions.map(q => q.id);
-    const isCurrentSectionValid = currentSectionFields.every(field => data[field as keyof FormValues] !== "");
-    
+    const currentSectionFields = currentSectionQuestions.map((q) => q.id);
+    const isCurrentSectionValid = currentSectionFields.every((field) => data[field as keyof FormValues] !== "");
+
     if (currentSection === sections.length - 1) {
       if (!isFormValid(data)) {
         toast({
@@ -229,11 +227,30 @@ export default function Assessment() {
 
   const currentQuestions = questions[sections[currentSection] as keyof typeof questions];
 
+  // Add function to handle calculator navigation
+  const navigateToCalculator = () => {
+    window.location.href = "/calculator";
+  };
+
+  // Add function to handle calendar scrolling
+  const scrollToCalendly = () => {
+    document.getElementById("calendly-widget")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Ensure all form fields are filled before allowing submission
+  const isFormValid = (data: FormValues) => {
+    const requiredFields = Object.entries(questions).flatMap(([_, sectionQuestions]) =>
+      sectionQuestions.map((q) => q.id)
+    );
+    return requiredFields.every((field) => data[field as keyof FormValues] !== "");
+  };
+
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold">Gen AI Readiness Assessment</h1>
+          <h1 className="text-4xl font-bold">AI Readiness Assessment</h1>
           <p className="text-lg text-muted-foreground">
             Evaluate your organization's readiness for AI adoption
           </p>
@@ -311,7 +328,7 @@ export default function Assessment() {
                       </Button>
                     )}
                   </div>
-                  
+
                   <div className="space-y-4 mt-8">
                     <h3 className="text-lg font-semibold">Additional Information</h3>
                     <FormField
@@ -387,13 +404,48 @@ export default function Assessment() {
                 </div>
               </div>
 
-              <div className="flex justify-center gap-4">
-                <Button size="lg" onClick={() => setAnalysisResult(null)}>
-                  Retake Assessment
+              <div className="flex justify-center gap-4 flex-wrap">
+                <Button
+                  size="lg"
+                  onClick={() => calculatorId && window.open(`/api/report/${calculatorId}`, '_blank')}
+                  disabled={!calculatorId}
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Full Report
                 </Button>
-                <Button size="lg" variant="outline" onClick={() => (window.location.href = "/")}>
-                  Return to Calculator
+                <Button
+                  size="lg"
+                  onClick={() => setAnalysisResult(null)}
+                  variant="outline"
+                >
+                  <RotateCcw className="mr-2 h-4 w-4" />
+                  Start Over
                 </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={scrollToCalendly}
+                >
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Schedule a Workshop
+                </Button>
+                <Button
+                  size="lg"
+                  onClick={navigateToCalculator}
+                  variant="outline"
+                >
+                  <Calculator className="mr-2 h-4 w-4" />
+                  Calculate ROI
+                </Button>
+              </div>
+
+              {/* Add Calendly widget */}
+              <div id="calendly-widget" className="mt-12">
+                <div
+                  className="calendly-inline-widget"
+                  data-url="https://calendly.com/your-calendar-url/30min?hide_event_type_details=1&hide_gdpr_banner=1"
+                  style={{ minWidth: 320, height: 700 }}
+                />
               </div>
             </div>
           </Card>
