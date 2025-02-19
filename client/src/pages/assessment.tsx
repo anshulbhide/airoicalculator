@@ -199,6 +199,8 @@ export default function Assessment() {
   const progress = ((currentSection + 1) / sections.length) * 100;
 
   const onSubmit = (data: FormValues) => {
+    if (!form.formState.isSubmitted) return;
+
     const currentSectionQuestions = questions[sections[currentSection] as keyof typeof questions];
     const currentSectionFields = currentSectionQuestions.map(q => q.id);
     const isCurrentSectionValid = currentSectionFields.every(field => data[field as keyof FormValues] !== "");
