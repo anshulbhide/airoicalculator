@@ -262,44 +262,34 @@ export default function Assessment() {
         {!analysisResult ? (
           <Card className="p-6">
             <div className="space-y-6">
-              <FormField
-                control={form.control}
-                name="industry"
-                render={({ field }) => (
-                  <FormItem className="space-y-3">
-                    <FormLabel>Select Your Industry</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Industry" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Retail">Retail</SelectItem>
-                        <SelectItem value="E-commerce">E-commerce</SelectItem>
-                        <SelectItem value="Technology">Technology</SelectItem>
-                        <SelectItem value="Manufacturing">Manufacturing</SelectItem>
-                        <SelectItem value="Healthcare">Healthcare</SelectItem>
-                        <SelectItem value="Education">Education</SelectItem>
-                        <SelectItem value="Financial Services">Financial Services</SelectItem>
-                        <SelectItem value="Professional Services">Professional Services</SelectItem>
-                        <SelectItem value="Other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="space-y-2">
-                <h2 className="text-2xl font-semibold capitalize">
-                  {sections[currentSection].replace(/([A-Z])/g, " $1").trim()}
-                </h2>
-                <Progress value={progress} className="h-2" />
-                <p className="text-sm text-muted-foreground">
-                  Section {currentSection + 1} of {sections.length}
-                </p>
-              </div>
-
               <FormProvider {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="industry"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3">
+                        <FormLabel>Select Your Industry</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Industry" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Retail">Retail</SelectItem>
+                            <SelectItem value="E-commerce">E-commerce</SelectItem>
+                            <SelectItem value="Technology">Technology</SelectItem>
+                            <SelectItem value="Manufacturing">Manufacturing</SelectItem>
+                            <SelectItem value="Healthcare">Healthcare</SelectItem>
+                            <SelectItem value="Education">Education</SelectItem>
+                            <SelectItem value="Financial Services">Financial Services</SelectItem>
+                            <SelectItem value="Professional Services">Professional Services</SelectItem>
+                            <SelectItem value="Other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   {currentQuestions.map((q) => (
                     <FormField
                       key={q.id}
