@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Progress } from "@/components/ui/progress";
@@ -300,6 +300,7 @@ export default function Assessment() {
 
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormProvider {...form}>
                   {currentQuestions.map((q) => (
                     <FormField
                       key={q.id}
@@ -377,6 +378,7 @@ export default function Assessment() {
                       )}
                     />
                   </div>
+                </FormProvider>
                 </form>
               </Form>
             </div>
