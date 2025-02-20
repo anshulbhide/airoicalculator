@@ -112,6 +112,7 @@ const questions = {
 };
 
 const formSchema = z.object({
+  industry: z.string().min(1, "Please select an industry"),
   ...Object.entries(questions).reduce((acc, [section, sectionQuestions]) => {
     sectionQuestions.forEach((q) => {
       acc[q.id] = z.string();
@@ -142,6 +143,7 @@ export default function Assessment() {
   const [currentSection, setCurrentSection] = useState(0);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
   const [calculatorId, setCalculatorId] = useState<string | null>(null);
+  const [industry, setIndustry] = useState<string>("");
   const { toast } = useToast();
 
   // Get calculatorId from URL when component mounts
@@ -259,6 +261,32 @@ export default function Assessment() {
         {!analysisResult ? (
           <Card className="p-6">
             <div className="space-y-6">
+              <FormField
+                control={form.control}
+                name="industry"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>Select Your Industry</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Industry" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Retail">Retail</SelectItem>
+                        <SelectItem value="E-commerce">E-commerce</SelectItem>
+                        <SelectItem value="Technology">Technology</SelectItem>
+                        <SelectItem value="Manufacturing">Manufacturing</SelectItem>
+                        <SelectItem value="Healthcare">Healthcare</SelectItem>
+                        <SelectItem value="Education">Education</SelectItem>
+                        <SelectItem value="Financial Services">Financial Services</SelectItem>
+                        <SelectItem value="Professional Services">Professional Services</SelectItem>
+                        <SelectItem value="Other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <div className="space-y-2">
                 <h2 className="text-2xl font-semibold capitalize">
                   {sections[currentSection].replace(/([A-Z])/g, " $1").trim()}
