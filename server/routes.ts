@@ -212,7 +212,7 @@ export function registerRoutes(app: Express) {
   Industry Context:
   The organization is in the ${industryContext} industry.
 
-  Please analyze the responses where each answer is scored 1-4, with 4 being the highest. Consider the specific challenges and opportunities of their industry. Mention common challenges faced in their industry. Convert these scores to percentages where:
+  Please analyze the responses where each answer is scored 1-4, with 4 being the highest. Consider the specific challenges and opportunities of their industry. Also take into account the specific use case that they want to explore and provide advice about that. Mention common challenges faced in their industry. Convert these scores to percentages where:
   - Score of 1 = 25%
   - Score of 2 = 50%
   - Score of 3 = 75%
