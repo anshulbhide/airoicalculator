@@ -298,9 +298,8 @@ export default function Assessment() {
                 </p>
               </div>
 
-              <Form {...form}>
+              <FormProvider {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormProvider {...form}>
                   {currentQuestions.map((q) => (
                     <FormField
                       key={q.id}
@@ -378,9 +377,8 @@ export default function Assessment() {
                       )}
                     />
                   </div>
-                </FormProvider>
                 </form>
-              </Form>
+              </FormProvider>
             </div>
           </Card>
         ) : (
