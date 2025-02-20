@@ -212,6 +212,9 @@ export function registerRoutes(app: Express) {
   Industry Context:
   The organization is in the ${industryContext} industry.
 
+  Use Case Vision:
+  The organization's specific automation goals: ${responses.useCaseVision || "No specific use cases provided"}
+
   Please analyze the responses where each answer is scored 1-4, with 4 being the highest. Consider the specific challenges and opportunities of their industry. Also take into account the specific use case that they want to explore and provide advice about that. Mention common challenges faced in their industry. Convert these scores to percentages where:
   - Score of 1 = 25%
   - Score of 2 = 50%
