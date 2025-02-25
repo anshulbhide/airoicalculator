@@ -22,104 +22,94 @@ import { Download, RotateCcw, Calendar, Calculator } from 'lucide-react'; // Ass
 import React from 'react';
 
 const questions = {
-  companyContext: [
+  organizationalReadiness: [
     {
-      id: "companyDescription",
-      question: "Write 2-3 lines about your company and who your customers are.",
-      type: "textarea"
+      id: "leadershipAlignment",
+      question: "How aligned is your leadership and organizational culture towards embracing AI?",
+      options: [
+        { value: "1", label: "Leadership is skeptical and reluctant to adopt AI" },
+        { value: "2", label: "Some leaders are open, but overall culture is risk-averse" },
+        { value: "3", label: "Leadership is supportive, though some internal resistance exists" },
+        { value: "4", label: "Strong leadership commitment with a proactive, innovation-driven culture" },
+      ],
     },
     {
-      id: "coreOfferings",
-      question: "Core Offerings or Business Model",
+      id: "llmExperimentation",
+      question: "What is your level of experimentation with LLM use cases?",
       options: [
-        { value: "productSales", label: "Product Sales" },
-        { value: "subscription", label: "Subscription Service" },
-        { value: "consulting", label: "Consulting/Services" },
-        { value: "marketplace", label: "Marketplace/Platform" }
-      ]
-    }
-  ],
-  businessGoal: [
-    {
-      id: "aiPriority",
-      question: "What is your top priority for AI implementation?",
-      options: [
-        { value: "customerSupport", label: "Improving customer support" },
-        { value: "workflows", label: "Streamlining internal workflows" },
-        { value: "marketing", label: "Enhancing marketing & personalization" },
-        { value: "costs", label: "Reducing operational costs" },
-        { value: "revenue", label: "Generating new revenue streams" },
-        { value: "other", label: "Other" }
+        { value: "1", label: "Haven't explored LLM use cases" },
+        { value: "2", label: "Initial exploration phase; piloting a few ideas" },
+        { value: "3", label: "Active experimentation with pilot projects underway" },
+        { value: "4", label: "Multiple successful LLM implementations driving measurable value" },
       ],
-      hasOther: true
-    }
+    },
   ],
-  useCases: [
+  dataInfrastructure: [
     {
-      id: "relevantUseCases",
-      question: "Which of these use cases are most appealing or relevant?",
-      type: "multiselect",
+      id: "centralizedData",
+      question: "Do you have a centralized data repository?",
       options: [
-        { value: "chatbots", label: "Automated customer-service chatbots" },
-        { value: "recommendations", label: "Content or product recommendation" },
-        { value: "documents", label: "Document processing & summarization" },
-        { value: "sales", label: "Sales enablement" },
-        { value: "analytics", label: "Intelligent analytics" },
-        { value: "hr", label: "HR & recruitment automation" },
-        { value: "other", label: "Other" }
+        { value: "1", label: "No centralized data storage" },
+        { value: "2", label: "Some data is centralized" },
+        { value: "3", label: "Most data is centralized" },
+        { value: "4", label: "Fully centralized data infrastructure" },
       ],
-      hasOther: true
-    }
-  ],
-  dataAvailability: [
-    {
-      id: "availableData",
-      question: "Which types of data do you have readily available?",
-      type: "multiselect",
-      options: [
-        { value: "customerInteractions", label: "Customer interaction logs" },
-        { value: "transactions", label: "Transaction/sales data" },
-        { value: "product", label: "Product or inventory data" },
-        { value: "marketing", label: "Marketing content and/or user behavior data" },
-        { value: "hr", label: "HR or internal documents" },
-        { value: "none", label: "None or limited data" }
-      ]
     },
     {
       id: "dataQuality",
-      question: "How well-structured and accessible is your data?",
+      question: "How clean and integrated is your customer data?",
       options: [
-        { value: "highly", label: "Highly structured and organized" },
-        { value: "somewhat", label: "Somewhat organized, but multiple sources" },
-        { value: "unstructured", label: "Mostly unstructured or scattered across departments" },
-        { value: "limited", label: "Limited data or not sure" }
-      ]
-    }
+        { value: "1", label: "Data is scattered and inconsistent" },
+        { value: "2", label: "Basic data organization" },
+        { value: "3", label: "Well-organized with some integration" },
+        { value: "4", label: "Fully integrated and maintained" },
+      ],
+    },
   ],
-  techMaturity: [
+  processAutomation: [
     {
-      id: "aiTools",
-      question: "Are you already using any AI tools or advanced analytics?",
+      id: "manualTasks",
+      question: "Which manual tasks would benefit from automation?",
       options: [
-        { value: "inhouse", label: "Yes, we have in-house AI/ML tools" },
-        { value: "thirdParty", label: "We use some third-party AI services" },
-        { value: "experimental", label: "We have experimented, but no formal deployment" },
-        { value: "none", label: "No AI usage yet" }
-      ]
-    }
+        { value: "1", label: "Most tasks are manual" },
+        { value: "2", label: "Some basic automation" },
+        { value: "3", label: "Significant automation in place" },
+        { value: "4", label: "Highly automated processes" },
+      ],
+    },
+    {
+      id: "workflows",
+      question: "Do you have standardized workflows?",
+      options: [
+        { value: "1", label: "No standardized workflows" },
+        { value: "2", label: "Some workflows documented" },
+        { value: "3", label: "Most workflows standardized" },
+        { value: "4", label: "Fully standardized and optimized" },
+      ],
+    },
   ],
-  budget: [
+  techCapabilities: [
     {
-      id: "budgetView",
-      question: "How do you view your budget for AI initiatives?",
+      id: "digitalTools",
+      question: "What percentage of your processes are supported by digital tools?",
       options: [
-        { value: "significant", label: "Significant investment is possible" },
-        { value: "moderate", label: "Moderate budget—looking for high ROI" },
-        { value: "limited", label: "Limited budget—must be cost-effective" },
-        { value: "uncertain", label: "Uncertain or exploratory" }
-      ]
-    }
-  ]
+        { value: "1", label: "Less than 25%" },
+        { value: "2", label: "25-50%" },
+        { value: "3", label: "50-75%" },
+        { value: "4", label: "Over 75%" },
+      ],
+    },
+    {
+      id: "apiIntegration",
+      question: "Do you leverage APIs and modern integrations?",
+      options: [
+        { value: "1", label: "No API usage" },
+        { value: "2", label: "Limited API integration" },
+        { value: "3", label: "Multiple API integrations" },
+        { value: "4", label: "Extensive API ecosystem" },
+      ],
+    },
+  ],
 };
 
 const formSchema = z.object({
