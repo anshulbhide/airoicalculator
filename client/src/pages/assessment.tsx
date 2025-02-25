@@ -318,19 +318,62 @@ export default function Assessment() {
                             </FormControl>
                           ) : q.type === "multiselect" ? (
                             <FormControl>
-                              <div>
+                              <div className="space-y-2">
                                 {q.options.map((option) => (
                                   <label key={option.value} className="flex items-center space-x-2">
-                                    <input type="checkbox" {...field} value={option.value} />
-                                    {option.label}
+                                    <input 
+                                      type="checkbox"
+                                      className="form-checkbox h-4 w-4"
+                                      checked={field.value?.includes(option.value)}
+                                      onChange={(e) => {
+                                        const values = field.value ? [...field.value.split(',')] : [];
+                                        if (e.target.checked) {
+                                          values.push(option.value);
+                                        } else {
+                                          const index = values.indexOf(option.value);
+                                          if (index > -1) values.splice(index, 1);
+                                        }
+                                        field.onChange(values.join(','));
+                                      }}
+                                    />
+                                    <span>{option.label}</span>
                                   </label>
                                 ))}
                                 {q.hasOther && (
-                                  <div>
+                                  <div className="mt-2">
                                     <label className="flex items-center space-x-2">
-                                      <input type="checkbox" {...field} value="other" />Other:
+                                      <input 
+                                        type="checkbox"
+                                        className="form-checkbox h-4 w-4"
+                                        checked={field.value?.includes('other')}
+                                        onChange={(e) => {
+                                          const values = field.value ? [...field.value.split(',')] : [];
+                                          if (e.target.checked) {
+                                            values.push('other');
+                                          } else {
+                                            const index = values.indexOf('other');
+                                            if (index > -1) values.splice(index, 1);
+                                          }
+                                          field.onChange(values.join(','));
+                                        }}
+                                      />
+                                      <span>Other:</span>
                                     </label>
-                                    <input type="text" {...field} className="ml-2" />
+                                    {field.value?.includes('other') && (
+                                      <input 
+                                        type="text"
+                                        className="mt-2 flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors"
+                                        placeholder="Please specify..."
+                                        onChange={(e) => {
+                                          const values = field.value ? field.value.split(',') : [];
+                                          const otherIndex = values.indexOf('other');
+                                          if (otherIndex > -1) {
+                                            values[otherIndex] = `other:${e.target.value}`;
+                                          }
+                                          field.onChange(values.join(','));
+                                        }}
+                                      />
+                                    )}
                                   </div>
                                 )}
                               </div>
