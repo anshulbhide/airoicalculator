@@ -1,0 +1,106 @@
+1. Basic Company & Industry Context
+Industry/Sector
+
+Dropdown (e.g. “Manufacturing,” “E-commerce/Retail,” “Healthcare,” “Finance,” “Education,” etc.)
+Core Offerings or Business Model
+
+Multiple choice (e.g. “Product Sales,” “Subscription Service,” “Consulting/Services,” “Marketplace/Platform,” etc.)
+Purpose: Gives the AI a sense of domain needs and typical pain points (compliance, data, etc.).
+
+2. Primary Business Goal or Challenge
+What is your top priority for AI implementation?
+Single-select:
+“Improving customer support”
+“Streamlining internal workflows”
+“Enhancing marketing & personalization”
+“Reducing operational costs”
+“Generating new revenue streams”
+“Other (please specify)”
+Purpose: Helps home in on the relevant use-case category (e.g., chatbot for customer support vs. advanced analytics for cost reduction).
+
+3. Potential AI Use Cases
+Which of these use cases are most appealing or relevant?
+Multiple-select:
+“Automated customer-service chatbots”
+“Content or product recommendation”
+“Document processing & summarization”
+“Sales enablement (e.g., lead qualification, personalized outreach)”
+“Intelligent analytics (e.g., demand forecasting)”
+“HR & recruitment automation”
+“Other (please specify)”
+Purpose: Captures immediate interest areas that the AI recommendation engine can key into.
+
+4. Data Availability & Quality
+Which types of data do you have readily available?
+
+Multiple-select:
+“Customer interaction logs (email, chat transcripts, etc.)”
+“Transaction/sales data”
+“Product or inventory data”
+“Marketing content and/or user behavior data”
+“HR or internal documents”
+“None or limited data”
+How well-structured and accessible is your data?
+
+Single-select:
+“Highly structured and organized”
+“Somewhat organized, but multiple sources”
+“Mostly unstructured or scattered across departments”
+“Limited data or not sure”
+Purpose: Helps assess feasibility and complexity of AI projects (retrieval-augmented generation, chatbot training, etc.).
+
+5. Current Tech Stack & AI Maturity
+Are you already using any AI tools or advanced analytics?
+Single-select:
+“Yes, we have in-house AI/ML tools”
+“We use some third-party AI services (chatbots, analytics, etc.)”
+“We have experimented, but no formal deployment”
+“No AI usage yet”
+Purpose: Indicates readiness and whether solutions can be built on or integrated with existing platforms.
+
+6. Regulatory & Compliance Requirements
+Do you have specific compliance requirements or data privacy constraints?
+Single-select:
+“Yes, heavily regulated (HIPAA, GDPR, etc.)”
+“Some compliance constraints, but manageable”
+“Not sure / exploring regulations”
+“No stringent constraints”
+Purpose: Helps shape solutions that comply with data-handling laws and industry standards.
+
+7. Budget & ROI Perspective
+How do you view your budget for AI initiatives?
+
+Single-select:
+“Significant investment is possible”
+“Moderate budget—looking for high ROI”
+“Limited budget—must be cost-effective”
+“Uncertain or exploratory”
+Preferred timeline to see measurable results?
+
+Single-select:
+“Within 3 months (quick wins)”
+“Within 6–12 months”
+“Longer-term initiative—1 year+”
+“No fixed timeline / exploring”
+Purpose: Determines the complexity and scope of possible solutions, plus how to structure pilot vs. production.
+
+8. Organizational & Implementation Readiness
+Which departments or teams would be directly involved?
+
+Multiple-select:
+“Customer Service / Support”
+“Marketing”
+“Sales”
+“Operations / Supply Chain”
+“Finance”
+“HR”
+“IT / Dev Team”
+“Other”
+Internal support for AI adoption
+
+Single-select:
+“We have dedicated teams eager to adopt”
+“Some interest, but not fully committed”
+“Leadership is skeptical; need strong proof of ROI”
+“No internal champion yet”
+Purpose: Identifies stakeholders, readiness for organizational change, and potential friction points.
