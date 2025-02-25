@@ -200,9 +200,12 @@ export function registerRoutes(app: Express) {
             industryContext = calculatorData.industry;
           }
         }
+      } catch (error) {
+        console.error("Error fetching calculator data:", error);
+      }
 
-        // Ensure responses is not null and stringify with a default empty object if needed
-        const responsesJson = JSON.stringify(responses ?? {}, null, 2);
+      // Ensure responses is not null and stringify with a default empty object if needed
+      const responsesJson = JSON.stringify(responses ?? {}, null, 2);
 
       // Prepare the assessment data for analysis
       const prompt = `As an AI readiness assessment expert, analyze the following assessment responses and provide a detailed evaluation of the organization's AI readiness. Score their readiness on a scale of 1-10 and provide specific recommendations for improvement.

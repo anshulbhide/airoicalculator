@@ -324,9 +324,9 @@ export default function Assessment() {
                                     <input 
                                       type="checkbox"
                                       className="form-checkbox h-4 w-4"
-                                      checked={field.value?.includes(option.value)}
+                                      checked={field.value?.split(',').includes(option.value)}
                                       onChange={(e) => {
-                                        const values = field.value ? [...field.value.split(',')] : [];
+                                        const values = field.value ? field.value.split(',').filter(Boolean) : [];
                                         if (e.target.checked) {
                                           values.push(option.value);
                                         } else {
@@ -345,9 +345,9 @@ export default function Assessment() {
                                       <input 
                                         type="checkbox"
                                         className="form-checkbox h-4 w-4"
-                                        checked={field.value?.includes('other')}
+                                        checked={field.value?.split(',').includes('other')}
                                         onChange={(e) => {
-                                          const values = field.value ? [...field.value.split(',')] : [];
+                                          const values = field.value ? field.value.split(',').filter(Boolean) : [];
                                           if (e.target.checked) {
                                             values.push('other');
                                           } else {
@@ -359,7 +359,7 @@ export default function Assessment() {
                                       />
                                       <span>Other:</span>
                                     </label>
-                                    {field.value?.includes('other') && (
+                                    {field.value?.split(',').includes('other') && (
                                       <input 
                                         type="text"
                                         className="mt-2 flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors"
@@ -430,7 +430,7 @@ export default function Assessment() {
                     )}
                   </div>
 
-                  
+
                 </form>
               </FormProvider>
             </div>
