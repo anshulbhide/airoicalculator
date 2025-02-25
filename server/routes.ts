@@ -193,12 +193,13 @@ export function registerRoutes(app: Express) {
       const { responses, calculatorId } = req.body;
       let industryContext = responses.industry || 'unspecified';
       
-      if (calculatorId) {
-        const calculator = await storage.getCalculatorById(calculatorId);
-        if (calculator) {
-          industryContext = calculator.industry;
+      try {
+        if (calculatorId) {
+          const calculatorData = await storage.getCalculatorById(calculatorId);
+          if (calculatorData) {
+            industryContext = calculatorData.industry;
+          }
         }
-      }
 
       // Ensure responses is not null and stringify with a default empty object if needed
       const responsesJson = JSON.stringify(responses ?? {}, null, 2);
