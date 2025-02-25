@@ -22,94 +22,94 @@ import { Download, RotateCcw, Calendar, Calculator } from 'lucide-react'; // Ass
 import React from 'react';
 
 const questions = {
-  organizationalReadiness: [
+  dataReadiness: [
     {
-      id: "leadershipAlignment",
-      question: "How aligned is your leadership and organizational culture towards embracing AI?",
+      id: "dataStrategy",
+      question: "Do you have a clear data strategy and governance framework?",
       options: [
-        { value: "1", label: "Leadership is skeptical and reluctant to adopt AI" },
-        { value: "2", label: "Some leaders are open, but overall culture is risk-averse" },
-        { value: "3", label: "Leadership is supportive, though some internal resistance exists" },
-        { value: "4", label: "Strong leadership commitment with a proactive, innovation-driven culture" },
-      ],
-    },
-    {
-      id: "llmExperimentation",
-      question: "What is your level of experimentation with LLM use cases?",
-      options: [
-        { value: "1", label: "Haven't explored LLM use cases" },
-        { value: "2", label: "Initial exploration phase; piloting a few ideas" },
-        { value: "3", label: "Active experimentation with pilot projects underway" },
-        { value: "4", label: "Multiple successful LLM implementations driving measurable value" },
-      ],
-    },
-  ],
-  dataInfrastructure: [
-    {
-      id: "centralizedData",
-      question: "Do you have a centralized data repository?",
-      options: [
-        { value: "1", label: "No centralized data storage" },
-        { value: "2", label: "Some data is centralized" },
-        { value: "3", label: "Most data is centralized" },
-        { value: "4", label: "Fully centralized data infrastructure" },
-      ],
+        { value: "1", label: "No formal data strategy or governance" },
+        { value: "2", label: "Basic data policies in place" },
+        { value: "3", label: "Comprehensive data strategy but gaps in implementation" },
+        { value: "4", label: "Well-defined and implemented data strategy and governance" }
+      ]
     },
     {
       id: "dataQuality",
-      question: "How clean and integrated is your customer data?",
+      question: "How would you rate your data quality and accessibility?",
       options: [
-        { value: "1", label: "Data is scattered and inconsistent" },
-        { value: "2", label: "Basic data organization" },
-        { value: "3", label: "Well-organized with some integration" },
-        { value: "4", label: "Fully integrated and maintained" },
-      ],
-    },
+        { value: "1", label: "Poor data quality, difficult to access" },
+        { value: "2", label: "Inconsistent quality, limited accessibility" },
+        { value: "3", label: "Good quality but some silos exist" },
+        { value: "4", label: "High-quality, easily accessible data" }
+      ]
+    }
   ],
-  processAutomation: [
+  technicalCapability: [
     {
-      id: "manualTasks",
-      question: "Which manual tasks would benefit from automation?",
+      id: "infrastructure",
+      question: "How mature is your technical infrastructure?",
       options: [
-        { value: "1", label: "Most tasks are manual" },
-        { value: "2", label: "Some basic automation" },
-        { value: "3", label: "Significant automation in place" },
-        { value: "4", label: "Highly automated processes" },
-      ],
+        { value: "1", label: "Basic/legacy systems" },
+        { value: "2", label: "Mix of modern and legacy systems" },
+        { value: "3", label: "Mostly modern, cloud-based systems" },
+        { value: "4", label: "Fully modernized, cloud-native infrastructure" }
+      ]
     },
     {
-      id: "workflows",
-      question: "Do you have standardized workflows?",
+      id: "aiExperience",
+      question: "What is your organization's experience with AI/ML?",
       options: [
-        { value: "1", label: "No standardized workflows" },
-        { value: "2", label: "Some workflows documented" },
-        { value: "3", label: "Most workflows standardized" },
-        { value: "4", label: "Fully standardized and optimized" },
-      ],
-    },
+        { value: "1", label: "No experience" },
+        { value: "2", label: "Limited pilot projects" },
+        { value: "3", label: "Several successful implementations" },
+        { value: "4", label: "Advanced AI/ML capabilities" }
+      ]
+    }
   ],
-  techCapabilities: [
+  businessAlignment: [
     {
-      id: "digitalTools",
-      question: "What percentage of your processes are supported by digital tools?",
+      id: "strategy",
+      question: "How well-defined are your AI use cases and success metrics?",
       options: [
-        { value: "1", label: "Less than 25%" },
-        { value: "2", label: "25-50%" },
-        { value: "3", label: "50-75%" },
-        { value: "4", label: "Over 75%" },
-      ],
+        { value: "1", label: "No clear use cases identified" },
+        { value: "2", label: "Basic use cases, no metrics" },
+        { value: "3", label: "Well-defined cases, basic metrics" },
+        { value: "4", label: "Clear cases with comprehensive metrics" }
+      ]
     },
     {
-      id: "apiIntegration",
-      question: "Do you leverage APIs and modern integrations?",
+      id: "budget",
+      question: "Do you have dedicated budget and resources for AI initiatives?",
       options: [
-        { value: "1", label: "No API usage" },
-        { value: "2", label: "Limited API integration" },
-        { value: "3", label: "Multiple API integrations" },
-        { value: "4", label: "Extensive API ecosystem" },
-      ],
-    },
+        { value: "1", label: "No dedicated resources" },
+        { value: "2", label: "Limited budget allocation" },
+        { value: "3", label: "Moderate budget and resources" },
+        { value: "4", label: "Significant investment committed" }
+      ]
+    }
   ],
+  peopleAndProcesses: [
+    {
+      id: "skills",
+      question: "How would you rate your team's AI/ML skills and expertise?",
+      options: [
+        { value: "1", label: "No relevant skills" },
+        { value: "2", label: "Basic understanding" },
+        { value: "3", label: "Good expertise in some areas" },
+        { value: "4", label: "Strong expertise across team" }
+      ]
+    },
+    {
+      id: "changeManagement",
+      question: "How effective is your change management process?",
+      options: [
+        { value: "1", label: "No formal process" },
+        { value: "2", label: "Basic change management" },
+        { value: "3", label: "Structured process with some gaps" },
+        { value: "4", label: "Comprehensive change management" }
+      ]
+    }
+  ]
 };
 
 const formSchema = z.object({
