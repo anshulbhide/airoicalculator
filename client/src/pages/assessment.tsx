@@ -22,91 +22,101 @@ import { Download, RotateCcw, Calendar, Calculator } from 'lucide-react'; // Ass
 import React from 'react';
 
 const questions = {
-  dataReadiness: [
+  companyContext: [
     {
-      id: "dataStrategy",
-      question: "Do you have a clear data strategy and governance framework?",
+      id: "companyDescription",
+      question: "Write 2-3 lines about your company and who your customers are.",
+      type: "textarea"
+    },
+    {
+      id: "coreOfferings",
+      question: "Core Offerings or Business Model",
       options: [
-        { value: "1", label: "No formal data strategy or governance" },
-        { value: "2", label: "Basic data policies in place" },
-        { value: "3", label: "Comprehensive data strategy but gaps in implementation" },
-        { value: "4", label: "Well-defined and implemented data strategy and governance" }
+        { value: "productSales", label: "Product Sales" },
+        { value: "subscription", label: "Subscription Service" },
+        { value: "consulting", label: "Consulting/Services" },
+        { value: "marketplace", label: "Marketplace/Platform" }
+      ]
+    }
+  ],
+  businessGoal: [
+    {
+      id: "aiPriority",
+      question: "What is your top priority for AI implementation?",
+      options: [
+        { value: "customerSupport", label: "Improving customer support" },
+        { value: "workflows", label: "Streamlining internal workflows" },
+        { value: "marketing", label: "Enhancing marketing & personalization" },
+        { value: "costs", label: "Reducing operational costs" },
+        { value: "revenue", label: "Generating new revenue streams" },
+        { value: "other", label: "Other" }
+      ],
+      hasOther: true
+    }
+  ],
+  useCases: [
+    {
+      id: "relevantUseCases",
+      question: "Which of these use cases are most appealing or relevant?",
+      type: "multiselect",
+      options: [
+        { value: "chatbots", label: "Automated customer-service chatbots" },
+        { value: "recommendations", label: "Content or product recommendation" },
+        { value: "documents", label: "Document processing & summarization" },
+        { value: "sales", label: "Sales enablement" },
+        { value: "analytics", label: "Intelligent analytics" },
+        { value: "hr", label: "HR & recruitment automation" },
+        { value: "other", label: "Other" }
+      ],
+      hasOther: true
+    }
+  ],
+  dataAvailability: [
+    {
+      id: "availableData",
+      question: "Which types of data do you have readily available?",
+      type: "multiselect",
+      options: [
+        { value: "customerInteractions", label: "Customer interaction logs" },
+        { value: "transactions", label: "Transaction/sales data" },
+        { value: "product", label: "Product or inventory data" },
+        { value: "marketing", label: "Marketing content and/or user behavior data" },
+        { value: "hr", label: "HR or internal documents" },
+        { value: "none", label: "None or limited data" }
       ]
     },
     {
       id: "dataQuality",
-      question: "How would you rate your data quality and accessibility?",
+      question: "How well-structured and accessible is your data?",
       options: [
-        { value: "1", label: "Poor data quality, difficult to access" },
-        { value: "2", label: "Inconsistent quality, limited accessibility" },
-        { value: "3", label: "Good quality but some silos exist" },
-        { value: "4", label: "High-quality, easily accessible data" }
+        { value: "highly", label: "Highly structured and organized" },
+        { value: "somewhat", label: "Somewhat organized, but multiple sources" },
+        { value: "unstructured", label: "Mostly unstructured or scattered across departments" },
+        { value: "limited", label: "Limited data or not sure" }
       ]
     }
   ],
-  technicalCapability: [
+  techMaturity: [
     {
-      id: "infrastructure",
-      question: "How mature is your technical infrastructure?",
+      id: "aiTools",
+      question: "Are you already using any AI tools or advanced analytics?",
       options: [
-        { value: "1", label: "Basic/legacy systems" },
-        { value: "2", label: "Mix of modern and legacy systems" },
-        { value: "3", label: "Mostly modern, cloud-based systems" },
-        { value: "4", label: "Fully modernized, cloud-native infrastructure" }
-      ]
-    },
-    {
-      id: "aiExperience",
-      question: "What is your organization's experience with AI/ML?",
-      options: [
-        { value: "1", label: "No experience" },
-        { value: "2", label: "Limited pilot projects" },
-        { value: "3", label: "Several successful implementations" },
-        { value: "4", label: "Advanced AI/ML capabilities" }
+        { value: "inhouse", label: "Yes, we have in-house AI/ML tools" },
+        { value: "thirdParty", label: "We use some third-party AI services" },
+        { value: "experimental", label: "We have experimented, but no formal deployment" },
+        { value: "none", label: "No AI usage yet" }
       ]
     }
   ],
-  businessAlignment: [
+  budget: [
     {
-      id: "strategy",
-      question: "How well-defined are your AI use cases and success metrics?",
+      id: "budgetView",
+      question: "How do you view your budget for AI initiatives?",
       options: [
-        { value: "1", label: "No clear use cases identified" },
-        { value: "2", label: "Basic use cases, no metrics" },
-        { value: "3", label: "Well-defined cases, basic metrics" },
-        { value: "4", label: "Clear cases with comprehensive metrics" }
-      ]
-    },
-    {
-      id: "budget",
-      question: "Do you have dedicated budget and resources for AI initiatives?",
-      options: [
-        { value: "1", label: "No dedicated resources" },
-        { value: "2", label: "Limited budget allocation" },
-        { value: "3", label: "Moderate budget and resources" },
-        { value: "4", label: "Significant investment committed" }
-      ]
-    }
-  ],
-  peopleAndProcesses: [
-    {
-      id: "skills",
-      question: "How would you rate your team's AI/ML skills and expertise?",
-      options: [
-        { value: "1", label: "No relevant skills" },
-        { value: "2", label: "Basic understanding" },
-        { value: "3", label: "Good expertise in some areas" },
-        { value: "4", label: "Strong expertise across team" }
-      ]
-    },
-    {
-      id: "changeManagement",
-      question: "How effective is your change management process?",
-      options: [
-        { value: "1", label: "No formal process" },
-        { value: "2", label: "Basic change management" },
-        { value: "3", label: "Structured process with some gaps" },
-        { value: "4", label: "Comprehensive change management" }
+        { value: "significant", label: "Significant investment is possible" },
+        { value: "moderate", label: "Moderate budget—looking for high ROI" },
+        { value: "limited", label: "Limited budget—must be cost-effective" },
+        { value: "uncertain", label: "Uncertain or exploratory" }
       ]
     }
   ]
